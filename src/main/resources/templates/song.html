@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Song Workspace</title>
+</head>
+<body>
+<h2>This is Your song</h2>
+
+
+<!--Chords from controller-->
+Next chord :
+
+<div class="text-center">
+    <form action="/song" method="post">
+        <input type="hidden" name="key" th:value="${key}"/>
+        <select name="chord">
+            <option value="#">Select a chord</option>
+            <option th:each="chords : ${chords}"
+                    th:value="${chords}"
+                    th:text="${chords}"></option>
+
+        </select>
+        <input type="submit" value="Add the Chord"/>
+        <ul>
+            <li th:each="songChord : ${songChords}" th:text="${songChord}"> </li>
+
+        </ul>
+    </form>
+</div>
+
+</body>
+</html>

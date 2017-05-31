@@ -1,0 +1,30 @@
+section {
+  background: pink;
+  height: 90vh;
+  padding-top: calc((90vh - 45vh) / 2);
+}
+
+aside {
+  background: orange;
+  height: 85vh;
+  width: 960px;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+small {
+  font-size: 0.6em;
+  color: lightgray;
+  position: relative;
+  top: 20px;
+}
+.c {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background: yellow;
+  font-size: 4.0em;
+  text-align: center;
+  vertical-align: center;
+  line-height: 1.75em;
+  margin: 0.3rem;
+}
