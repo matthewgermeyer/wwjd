@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class JimiController {
@@ -22,35 +21,36 @@ public class JimiController {
 
     @GetMapping("/project")
     public String getNewProject() {
-
         return "project";
     }
 
-    @PostMapping("/key")
-    public String getSongPageForKey(@RequestParam(value = "key", required = true) String key, Model model) {
-        System.out.println(key);
+    @PostMapping("/keyurl")
+    public String songPageFromKey(@RequestParam(value = "keyhttpparam",
+            required = true) String key, Model model) {
         List<String> chords = keyService.getChordsFromKey(key);
         model.addAttribute("chords", chords);
         model.addAttribute("key", key);
-
         return "song";
     }
 
-    @PostMapping("/song")
-    public String addChordToSong(@RequestParam(value = "key", required = true) String key,
-                                 @RequestParam(value = "chord", required = true) String chord,
-                                 @RequestParam(value = "songChords", required = false) List<String> songChords,
+    @PostMapping("/songurl")
+    public String addChordToSong(@RequestParam(value = "keyparam", required = true) String key,
+                                 @RequestParam(value = "chordparam", required = true) String chord,
+                                 @RequestParam(value = "songChordsparam", required = false) List<String> songChords,
                                  Model model) {
         System.out.println(key);
         if (songChords == null){
             songChords = new ArrayList<>();
         }
         songChords.add(chord);
-        List<String> chords = chordService.getSuggestedChords(key, songChords);
-        model.addAttribute("chords", chords);
+        List<String> suggestedChords = keyService.getChordsFromKey(key);
+        suggestedChords.addAll(chordService.getSuggestedChords(key, songChords));
+
+        //Convert to a set to remove duplication
+        Set<String> suggestedChordSet = new TreeSet<>(suggestedChords);
+        model.addAttribute("chords", suggestedChordSet);
         model.addAttribute("key", key);
         model.addAttribute("songChords", songChords);
-
 
         return "song";
     }

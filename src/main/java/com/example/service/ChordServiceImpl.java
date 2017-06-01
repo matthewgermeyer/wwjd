@@ -15,11 +15,14 @@ public class ChordServiceImpl implements ChordService {
     @Override
     public List<String> getSuggestedChords(String key, List<String> songChords) {
         List<String> chords = new ArrayList<>();
-        chords.add("Eo7");
+        chords.add("E7");
         chords.add("D7");
         chords.add("Em");
+        chords.add("Am");
+        chords.add("C");
+        chords.add("G");
+        chords.add("D");
         return chords;
-
     }
 
     @Override

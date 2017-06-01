@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
 
     <meta charset="utf-8"/>
@@ -21,28 +20,32 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"/>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <script type="text/javascript"></script>
-
-    <![endif]-->
-
 </head>
 
 <body>
 <h1> Howdy!  Let's build a song!</h1>
 <h3>  We need a Key to Start!</h3>
 
-<form action="/key" method="post">
+<form action="/keyurl" method="post">
 
-<select name="key">
+<select name="keyhttpparam">
     <option>Select a Key!</option>
     <option value="C">C</option>
-    <option value="G">G</option>
+    <option value="Db">Db</option>
     <option value="D">D</option>
+    <option value="Eb">Eb</option>
+    <option value="E">E</option>
+    <option value="F">F</option>
+    <option value="F#">F#</option>
+    <option value="G">G</option>
+    <option value="Ab">Ab</option>
+    <option value="A">A</option>
+    <option value="Bb">Bb</option>
+    <option value="B">B</option>
+
 </select>
     <input type="submit" value="Submit"/>
 </form>
