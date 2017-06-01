@@ -70,23 +70,23 @@ public class KeyServiceImpl implements KeyService{
                 break;
 
             case "B":
-                chords.add("E");
-                chords.add("F#m");
-                chords.add("G#m");
-                chords.add("A");
-                chords.add("B7");
+                chords.add("B");
                 chords.add("C#m");
-                chords.add("D#o");
+                chords.add("D#m");
+                chords.add("E");
+                chords.add("F#7");
+                chords.add("G#m");
+                chords.add("A#o");
                 break;
 
             case "F#":
-                chords.add("E");
-                chords.add("F#m");
+                chords.add("F#");
                 chords.add("G#m");
-                chords.add("A");
-                chords.add("B7");
-                chords.add("C#m");
-                chords.add("D#o");
+                chords.add("A#m");
+                chords.add("B");
+                chords.add("C#7");
+                chords.add("D#m");
+                chords.add("Fo");
                 break;
 
             case "Db":

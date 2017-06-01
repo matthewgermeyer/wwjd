@@ -65,5 +65,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: com.vaadin.external.google:android-json:0.0.20131108.vaadin1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-core:4.3.7.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:4.3.7.RELEASE" level="project" />
+    <orderEntry type="library" name="jfugue-5.0.9" level="project" />
   </component>
 </module>
