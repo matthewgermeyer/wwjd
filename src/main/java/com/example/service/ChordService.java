@@ -1,7 +1,5 @@
 package com.example.service;
 
-import domain.Chord;
-
 import java.util.List;
 
 /**
@@ -9,18 +7,12 @@ import java.util.List;
  */
 public interface ChordService {
 
-    //Get suggested chords given the key and the song as it currently exists.
-    List<String> getSuggestedChords(String key, List<String> songChords);
+    List<String> getBasicChords(String key);
 
+    //Get Dominant chords that make sense given the key.
+    public List<String> addSuggestedChord(String key, List<String> songChords);
 
-    //Add a selected chord to end of chart.
-    void addChord();
-
-    //Remove chord from end of chart.
-    void deleteChord();
-
-    //Get the list of chords in a song.
-    List<Chord> listChordsForSong();
+    public List<String> jimiPick(List<String> songChords);
 
 
 }

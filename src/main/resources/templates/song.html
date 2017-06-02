@@ -6,49 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-
     <title>WWJP? Assisted Songwriting and Practice Tools! </title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
-
     <!-- Custom CSS -->
     <link href="css/landing-page.css" rel="stylesheet"/>
-
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"/>
-
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <script type="text/javascript"></script>
 </head>
 
-
-
 <body>
+
 <h2>This is Your song in <span th:text="${key}"></span></h2>
 
-Pick the next Chord :
-    <form action="/songurl" method="post">
-        <input type="hidden" name="keyparam" th:value="${key}"/>
-
-        <select name="chordparam">
+Pick next Chord from List :
+    <form action="/song" method="post">
+        <input type="hidden" name="key" th:value="${key}"/>
+        <select name="chord">
             <option value="#">Select a chord</option>
             <option th:each="chords : ${chords}"
                     th:value="${chords}"
                     th:text="${chords}"></option>
         </select>
         <br />
-        <input type="checkbox" name="songChordsparam"
+        <input type="checkbox" name="songChords"
                th:each="songChord : ${songChords}"
                th:text="${songChord} + ' | '"
                th:value="${songChord}"
                 checked="checked"/><br/>
-        <br />
-        <input type="submit" value="Add the Chord"/>
-
+        <br/>
+        <input type="submit" value="Add list Chord"/>
     </form>
+
+
+<form action="/jimi" method="post">
+    <input type="hidden" name="key" th:value="${key}"/>
+    <input type="hidden" name="songChords" th:value="${songChords}"/>
+    <input type="submit" value="Add Jimi Chord"/>
+</form>
 
 </body>
 </html>
