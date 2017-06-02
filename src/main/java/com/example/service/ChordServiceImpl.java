@@ -3,7 +3,6 @@ package com.example.service;
 import org.jfugue.theory.Chord;
 import org.jfugue.theory.ChordProgression;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,20 +49,27 @@ public class ChordServiceImpl implements ChordService {
     @Override
     public List<String> jimiPick(List<String> songChords) {
         System.out.println("entered jimiPick");
+        System.out.println("songChords prior = " + songChords);
         System.out.println("*************");
+        System.out.println("Last Chord is" + songChords.get(songChords.size()-1));
 
+        //if Last Chord is Am add Bb7o to songChords
+        if (songChords.get(0) != null){
+            System.out.println("***#*#*$@(#$*&(@#*&$(@*#&$");
+            System.out.println("tell me something good! " + songChords.get(0));
 
-            //if Last Chord is Am add Bb7o to songChords
-            if (songChords.get(songChords.size() - 1).equals("Am")) {
-                songChords.add("Bb7o");
-            } else {
-                System.out.println("Last chord was adding C");
-                songChords.add("C");
-            }
-        System.out.println("==============");
-        System.out.println("Size of songChords is" + songChords.size());
-        System.out.println("==============");
+        }
+        if (songChords.get(songChords.size() - 1).equals("Am")) {
+            songChords.add("Bb7o");
+        } else {
             System.out.println(songChords);
+            System.out.println("adding C");
+            songChords.add("C");
+            System.out.println(songChords);
+            System.out.println("Size of songChords is " + songChords.size());
+        }
+        System.out.println("==============");
+        System.out.println(songChords);
 
         //picker is random 1-10... 1-5 up a 4th, 6-10 up a 5th
         //given that chord's root ->  choose the root for the candidate chord

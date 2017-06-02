@@ -73,10 +73,11 @@ public class JimiController {
 
         //Convert to a set to remove duplication
         Set<String> suggestedChordSet = new TreeSet<>(suggestedChords);
+
         model.addAttribute("chords", suggestedChordSet);
         model.addAttribute("key", key);
         model.addAttribute("songChords", songChords);
-        chordService.addSuggestedChord("C", songChords);
+//        chordService.addSuggestedChord("C", songChords);
 
         return "song";
     }
