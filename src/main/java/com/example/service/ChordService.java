@@ -14,5 +14,9 @@ public interface ChordService {
 
     public List<String> jimiPick(List<String> songChords);
 
+    public String getNextChord(String lastChord);
+    public String getNextRoot(String lastChord);
+    public String getNextExt();
+
 
 }
