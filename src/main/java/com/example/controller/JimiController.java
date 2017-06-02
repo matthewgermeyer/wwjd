@@ -19,7 +19,7 @@ public class JimiController {
     ChordService chordService;
 
     @GetMapping("/project")
-    public String getNewProject() {
+    public String startNewProject() {
         return "project";
     }
 
