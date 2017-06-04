@@ -21,6 +21,7 @@ public class JimiController {
     @GetMapping("/project")
     public String startNewProject() {
         return "project";
+        //Which has us select a key.
     }
 
     @PostMapping("/key")
@@ -41,11 +42,13 @@ public class JimiController {
             songChords = new ArrayList<>();
         }
         songChords.add(chord);
+
         List<String> suggestedChords = keyService.getChordsFromKey(key);
         suggestedChords.addAll(chordService.getBasicChords(key));
 
         //Convert to a set to remove duplication
         Set<String> suggestedChordSet = new TreeSet<>(suggestedChords);
+
         model.addAttribute("chords", suggestedChordSet);
         model.addAttribute("key", key);
         model.addAttribute("songChords", songChords);
