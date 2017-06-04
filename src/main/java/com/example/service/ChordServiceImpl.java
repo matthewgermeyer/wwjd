@@ -69,13 +69,6 @@ public class ChordServiceImpl implements ChordService {
             System.out.println("chordType -> " + chord.getChordType());
             chords.add("Human readable ---> " + chord.toHumanReadableString());
 
-//            String chordAsString = chord.toHumanReadableString().substring(0, 1);
-//            if (chord.isMajor()) {
-//                chordAsString += "M";
-//            } else if (chord.isMinor()) {
-//                chordAsString += "m";
-//            }
-//            chords.add(chordAsString);
         }
         return chords;
     }
