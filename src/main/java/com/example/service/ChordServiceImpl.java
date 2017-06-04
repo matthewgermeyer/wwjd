@@ -21,20 +21,23 @@ public class ChordServiceImpl implements ChordService {
         ChordProgression cp = new ChordProgression("I ii iii IV V vi ");
         cp.setKey(key);
 
-        System.out.println("================================");
-        System.out.println("making basic chord palette for "+ key +".  Progression ->" + cp);
+        System.out.println("==============Get Basic Chords==================");
+        System.out.println("key is -> " + key);
+        System.out.println("Populating pick list using getBasicChords.  Chords ->" + cp);
 
+        //Turn jfugue progression into our chord list
 
-        //iterate through jfugue generic progression.
-        //Apply our key.
-        //return basic chord list from the results.
         for (Chord chord : cp.getChords()) {
-            System.out.println("================================");
-            System.out.println("chord original -> " + chord.toHumanReadableString());
-
             String original = chord.toHumanReadableString();
-            String root = original.substring(0,1);
-            String ext = original.toLowerCase().substring(2);
+
+
+            String root = original.substring(0,2);
+            if (root.substring(1,2).equals("4") || root.substring(1,2).equals("5")){
+                root = root.substring(0,1);
+            }
+            
+            String ext = original.substring(original.length() - 3);
+            ext = ext.toLowerCase();
 
             switch (ext){
 
@@ -48,17 +51,21 @@ public class ChordServiceImpl implements ChordService {
                 default: ext = "";
             }
             //Assemble the finished chords and add them to chords List.
+            System.out.println("************** Roots" + root);
+
             String finishedChord = root + ext;
+//            if (finishedChord.substring(1,2).equals("B"))
             chords.add(finishedChord);
-            System.out.println("Root: " + root + "   ||  Ext: " + ext);
-            System.out.println("Finished -- " + finishedChord);
-            System.out.println("chords -> " + chords);
+
         }
+        System.out.println("chords -> " + chords);
         return chords;
     }
 
     @Override
     public List<String> addSuggestedChord(String key, List<String> songChords) {
+        System.out.println("=============");
+        System.out.println("entering addSuggestedChord");
         List<String> chords = new ArrayList<>();
         ChordProgression cp = new ChordProgression("I");
         cp.setKey(key);
@@ -75,28 +82,22 @@ public class ChordServiceImpl implements ChordService {
 
     @Override
     public List<String> jimiPick(List<String> songChords) {
+        System.out.println("====================");
+        System.out.println("entered jimiPick");
 
         String lastChord = songChords.get(songChords.size() - 1);
         String lastChordRoot = lastChord.substring(0, 1);
         String lastChordExt = lastChord.substring(1);
-        String defaultChord = "C";
 
-        System.out.println("entered jimiPick");
         System.out.println("songChords prior = " + songChords);
-        System.out.println("*************");
-        System.out.println("Last Chord is " + lastChord);
 
         //if Last Chord is Am add E7 to songChords
         if (lastChord.equals("Am")) {
             System.out.println("Root is -> " + lastChordRoot);
             System.out.println("extension is -> " + lastChordExt);
             songChords.add("E7");
-        } else {
-            //Add C instead
-            System.out.println(songChords);
-            System.out.println("adding default chord" + defaultChord);
-            System.out.println(songChords);
-            System.out.println("Size of songChords is " + songChords.size());
+
+        }  else {
 
             songChords.add(getNextChord(lastChord));
             System.out.println(songChords);
@@ -124,7 +125,7 @@ public class ChordServiceImpl implements ChordService {
         String nextRoot;
         String lastRoot = lastChord.substring(0, 1);
 
-        int picker = random.nextInt(4);
+        int picker = random.nextInt(6);
         System.out.println("picker is " + picker);
 
         switch (picker) {
@@ -139,9 +140,15 @@ public class ChordServiceImpl implements ChordService {
                 nextRoot = "D";
                 break;
             case 3:
-                nextRoot = "G";
+                nextRoot = "E";
                 break;
             case 4:
+                nextRoot = "F";
+                break;
+            case 5:
+                nextRoot = "G";
+                break;
+            case 6:
                 nextRoot = "A";
                 break;
 

@@ -46,13 +46,13 @@ public class JimiController {
         List<String> suggestedChords = keyService.getChordsFromKey(key);
         suggestedChords.addAll(chordService.getBasicChords(key));
 
-        //Convert to a set to remove duplication
+        //Convert to a set to remove any duplications
         Set<String> suggestedChordSet = new TreeSet<>(suggestedChords);
 
         model.addAttribute("chords", suggestedChordSet);
         model.addAttribute("key", key);
         model.addAttribute("songChords", songChords);
-        chordService.addSuggestedChord("C", songChords);
+//        chordService.addSuggestedChord("C", songChords);
 
         return "song";
     }
@@ -80,7 +80,6 @@ public class JimiController {
         model.addAttribute("chords", suggestedChordSet);
         model.addAttribute("key", key);
         model.addAttribute("songChords", songChords);
-//        chordService.addSuggestedChord("C", songChords);
 
         return "song";
     }
