@@ -160,11 +160,12 @@ public class ChordServiceImpl implements ChordService {
     }
 
     public String getNextExt() {
-        System.out.println("XXXXXXXXXX - Entering get Next ext");
+        System.out.println("========================");
+        System.out.println(" Entering get Next ext");
         String nextExt;
 
-        int picker = random.nextInt(3);
-        System.out.println("****Picker is***" + picker);
+        int picker = random.nextInt(4);
+        System.out.println("********Picker is*******" + picker);
         switch (picker) {
             case 0:
                 nextExt = "";
