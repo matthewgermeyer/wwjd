@@ -7,16 +7,16 @@ import java.util.List;
  */
 public interface ChordService {
 
-    List<String> getBasicChords(String key);
+     List<String> getBasicChords(String key);
+     List<String> addSuggestedChord(String key, List<String> songChords);
+     List<String> jimiPickNextChord(List<String> songChords);
+     String getNextChord(String lastChord);
+     String getNextExt();
 
-    //Get Dominant chords that make sense given the key.
-    public List<String> addSuggestedChord(String key, List<String> songChords);
-
-    public List<String> jimiPick(List<String> songChords);
-
-    public String getNextChord(String lastChord);
-    public String getNextRoot(String lastChord);
-    public String getNextExt();
+     List<String> generateProgression_1454(String key);
+     List<String> generateProgression_1564(String key);
+     List<String> generateProgression_1645(String key);
+     List<String> generateProgression_12bar(String key);
 
 
 }

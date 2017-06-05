@@ -22,24 +22,24 @@ public class ChordServiceImpl implements ChordService {
         cp.setKey(key);
 
         System.out.println("==============Get Basic Chords==================");
-        System.out.println("key is -> " + key);
-        System.out.println("Populating pick list using getBasicChords.  Chords ->" + cp);
+        System.out.println("getBasicChords in key -> " + key);
 
-        //Turn jfugue progression into our chord list
-
+        //Use jFugue to convert our generic progression to human readable chords list
         for (Chord chord : cp.getChords()) {
             String original = chord.toHumanReadableString();
+            String root = original.substring(0, 2);
 
-
-            String root = original.substring(0,2);
-            if (root.substring(1,2).equals("4") || root.substring(1,2).equals("5")){
-                root = root.substring(0,1);
+            //First gather and clean up the root
+            //Drop off the number (3, 4 or 5) that represents the octave of the root.
+            if (root.substring(1, 2).equals("4") || root.substring(1, 2).equals("5") || root.substring(1, 2).equals("3")) {
+                root = root.substring(0, 1);
             }
-            
+            //Gather the root, ensure it's lowercase
             String ext = original.substring(original.length() - 3);
             ext = ext.toLowerCase();
 
-            switch (ext){
+            //convert the extension to more user friendly versions.
+            switch (ext) {
 
                 case ("maj"):
                     ext = "";
@@ -48,13 +48,12 @@ public class ChordServiceImpl implements ChordService {
                 case ("min"):
                     ext = "m";
                     break;
-                default: ext = "";
+                default:
+                    ext = "";
             }
-            //Assemble the finished chords and add them to chords List.
-            System.out.println("************** Roots" + root);
-
+            //Assemble the finished chord
             String finishedChord = root + ext;
-//            if (finishedChord.substring(1,2).equals("B"))
+            //Add it to the list
             chords.add(finishedChord);
 
         }
@@ -73,17 +72,18 @@ public class ChordServiceImpl implements ChordService {
         for (Chord chord : cp.getChords()) {
             System.out.println("=============");
             System.out.println(chord);
-            System.out.println("chordType -> " + chord.getChordType());
-            chords.add("Human readable ---> " + chord.toHumanReadableString());
-
         }
         return chords;
     }
 
     @Override
-    public List<String> jimiPick(List<String> songChords) {
+    public List<String> jimiPickNextChord(List<String> songChords) {
         System.out.println("====================");
-        System.out.println("entered jimiPick");
+        System.out.println("entered jimiPickNextChord");
+
+        if (songChords.size() < 1) {
+            songChords.add("C");
+        }
 
         String lastChord = songChords.get(songChords.size() - 1);
         String lastChordRoot = lastChord.substring(0, 1);
@@ -95,12 +95,10 @@ public class ChordServiceImpl implements ChordService {
         if (lastChord.equals("Am")) {
             System.out.println("Root is -> " + lastChordRoot);
             System.out.println("extension is -> " + lastChordExt);
-            songChords.add("E7");
+            songChords.add("Dm");
 
-        }  else {
-
+        } else {
             songChords.add(getNextChord(lastChord));
-            System.out.println(songChords);
 
         }
         System.out.println("==============");
@@ -111,12 +109,7 @@ public class ChordServiceImpl implements ChordService {
 
     public String getNextChord(String lastChord) {
         String nextChord;
-
-        String nextChordRoot = getNextRoot(lastChord);
-        String nextChordExt = getNextExt();
-
-        nextChord = nextChordRoot + nextChordExt;
-
+        nextChord = getNextRoot(lastChord) + getNextExt();
         return nextChord;
 
     }
@@ -125,8 +118,7 @@ public class ChordServiceImpl implements ChordService {
         String nextRoot;
         String lastRoot = lastChord.substring(0, 1);
 
-        int picker = random.nextInt(6);
-        System.out.println("picker is " + picker);
+        int picker = random.nextInt(7);
 
         switch (picker) {
             case 0:
@@ -151,21 +143,21 @@ public class ChordServiceImpl implements ChordService {
             case 6:
                 nextRoot = "A";
                 break;
+            case 7:
+                nextRoot = "B";
+                break;
 
             default:
                 nextRoot = "Q";
         }
-
         return nextRoot;
     }
 
     public String getNextExt() {
-        System.out.println("========================");
-        System.out.println(" Entering get Next ext");
         String nextExt;
 
         int picker = random.nextInt(4);
-        System.out.println("********Picker is*******" + picker);
+
         switch (picker) {
             case 0:
                 nextExt = "";
@@ -181,9 +173,153 @@ public class ChordServiceImpl implements ChordService {
                 break;
             default:
                 nextExt = "";
-
         }
         return nextExt;
+    }
+
+
+    public List<String> generateProgression_1454(String key) {
+        List<String> songChords = new ArrayList<>();
+        ChordProgression cp = new ChordProgression("I IV V IV");
+        cp.setKey(key);
+
+        //Use jFugue to convert our generic progression to human readable chords list
+        for (Chord chord : cp.getChords()) {
+            String original = chord.toHumanReadableString();
+            String root = original.substring(0, 2);
+
+            //First gather and clean up the root
+            //Drop off the number (3, 4 or 5) that represents the octave of the root.
+            if (root.substring(1, 2).equals("4") || root.substring(1, 2).equals("5") || root.substring(1, 2).equals("3")) {
+                root = root.substring(0, 1);
+            }
+            //Gather the root, ensure it's lowercase
+            String ext = original.substring(original.length() - 3);
+            ext = ext.toLowerCase();
+
+            //convert the extension to more user friendly versions.
+            switch (ext) {
+
+                case ("maj"):
+                    ext = "";
+                    break;
+
+                case ("min"):
+                    ext = "m";
+                    break;
+                default:
+                    ext = "";
+            }
+            //Assemble the finished chord
+            String finishedChord = root + ext;
+            //Add it to the list
+            songChords.add(finishedChord);
+
+        }
+        return songChords;
+    }
+
+    public List<String> generateProgression_1564(String key) {
+        List<String> songChords = new ArrayList<>();
+        ChordProgression cp = new ChordProgression("I V vi IV");
+        cp.setKey(key);
+
+        for (Chord chord : cp.getChords()) {
+            String original = chord.toHumanReadableString();
+            String root = original.substring(0, 2);
+
+            if (root.substring(1, 2).equals("4") || root.substring(1, 2).equals("5") || root.substring(1, 2).equals("3")) {
+                root = root.substring(0, 1);
+            }
+            String ext = original.substring(original.length() - 3);
+            ext = ext.toLowerCase();
+
+            switch (ext) {
+
+                case ("maj"):
+                    ext = "";
+                    break;
+
+                case ("min"):
+                    ext = "m";
+                    break;
+                default:
+                    ext = "";
+            }
+            String finishedChord = root + ext;
+            songChords.add(finishedChord);
+
+        }
+        return songChords;
+
+
+    }
+
+    public List<String> generateProgression_1645(String key) {
+        List<String> songChords = new ArrayList<>();
+        ChordProgression cp = new ChordProgression("I V vi IV");
+        cp.setKey(key);
+
+        for (Chord chord : cp.getChords()) {
+            String original = chord.toHumanReadableString();
+            String root = original.substring(0, 2);
+
+            if (root.substring(1, 2).equals("4") || root.substring(1, 2).equals("5") || root.substring(1, 2).equals("3")) {
+                root = root.substring(0, 1);
+            }
+            String ext = original.substring(original.length() - 3);
+            ext = ext.toLowerCase();
+
+            switch (ext) {
+
+                case ("maj"):
+                    ext = "";
+                    break;
+
+                case ("min"):
+                    ext = "m";
+                    break;
+                default:
+                    ext = "";
+            }
+            String finishedChord = root + ext;
+            songChords.add(finishedChord);
+
+        }
+        return songChords;
+    }
+    public List<String> generateProgression_12bar(String key){
+        List<String> songChords = new ArrayList<>();
+        ChordProgression cp = new ChordProgression("I I I I IV IV I I V IV I V");
+        cp.setKey(key);
+
+        for (Chord chord : cp.getChords()) {
+            String original = chord.toHumanReadableString();
+            String root = original.substring(0, 2);
+
+            if (root.substring(1, 2).equals("4") || root.substring(1, 2).equals("5") || root.substring(1, 2).equals("3")) {
+                root = root.substring(0, 1);
+            }
+            String ext = original.substring(original.length() - 3);
+            ext = ext.toLowerCase();
+
+            switch (ext) {
+
+                case ("maj"):
+                    ext = "";
+                    break;
+
+                case ("min"):
+                    ext = "m";
+                    break;
+                default:
+                    ext = "";
+            }
+            String finishedChord = root + ext;
+            songChords.add(finishedChord);
+
+        }
+        return songChords;
     }
 
 

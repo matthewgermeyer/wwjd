@@ -43,7 +43,7 @@ public class JimiController {
         }
         songChords.add(chord);
 
-        List<String> suggestedChords = keyService.getChordsFromKey(key);
+        List<String> suggestedChords = keyService.getVandVIIChordsFromKey(key);
         suggestedChords.addAll(chordService.getBasicChords(key));
 
         //Convert to a set to remove any duplications
@@ -52,26 +52,23 @@ public class JimiController {
         model.addAttribute("chords", suggestedChordSet);
         model.addAttribute("key", key);
         model.addAttribute("songChords", songChords);
-//        chordService.addSuggestedChord("C", songChords);
 
         return "song";
     }
 
     @PostMapping("/jimi")
     public String addJimiChord(@RequestParam(value = "key", required = true) String key,
-                               @RequestParam(value = "songChords", required = true) List<String> songChords,
+                               @RequestParam(value = "songChords", required = false) List<String> songChords,
                                Model model) {
 
         if (songChords == null){
             songChords = new ArrayList<>();
         }
-        System.out.println("********");
-        System.out.println(songChords);
-        System.out.println("********");
 
-        chordService.jimiPick(songChords);
+        //Add the next chord via jimiPickNextChord Method.
+        chordService.jimiPickNextChord(songChords);
 
-        List<String> suggestedChords = keyService.getChordsFromKey(key);
+        List<String> suggestedChords = keyService.getVandVIIChordsFromKey(key);
         suggestedChords.addAll(chordService.getBasicChords(key));
 
         //Convert to a set to remove duplication

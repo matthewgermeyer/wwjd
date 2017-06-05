@@ -7,5 +7,5 @@ import java.util.List;
  */
 public interface KeyService {
 
-    List<String> getChordsFromKey(String key);
+    List<String> getVandVIIChordsFromKey(String key);
 }
