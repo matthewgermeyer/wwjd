@@ -21,7 +21,6 @@ public class JimiController {
     @GetMapping("/project")
     public String startNewProject() {
         return "project";
-        //Which has us select a key.
     }
 
     @PostMapping("/key")
@@ -41,6 +40,7 @@ public class JimiController {
         if (songChords == null){
             songChords = new ArrayList<>();
         }
+        //Add picked chord from list to songChords.
         songChords.add(chord);
 
         List<String> suggestedChords = keyService.getVandVIIChordsFromKey(key);
@@ -71,7 +71,6 @@ public class JimiController {
         List<String> suggestedChords = keyService.getVandVIIChordsFromKey(key);
         suggestedChords.addAll(chordService.getBasicChords(key));
 
-        //Convert to a set to remove duplication
         Set<String> suggestedChordSet = new TreeSet<>(suggestedChords);
 
         model.addAttribute("chords", suggestedChordSet);

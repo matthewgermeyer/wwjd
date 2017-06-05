@@ -1,9 +1,17 @@
 package com.example.service;
 
+import org.jfugue.midi.MidiFileManager;
+import org.jfugue.pattern.Pattern;
 import org.jfugue.theory.Chord;
 import org.jfugue.theory.ChordProgression;
 import org.springframework.stereotype.Service;
 
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -111,7 +119,7 @@ public class ChordServiceImpl implements ChordService {
 
         System.out.println("songChords prior = " + songChords);
 
-        //if Last Chord is Am add E7 to songChords
+        //if Last Chord is Am add Dm to songChords
         if (lastChord.equals("Am")) {
             System.out.println("Root is -> " + lastChordRoot);
             System.out.println("extension is -> " + lastChordExt);
@@ -119,8 +127,8 @@ public class ChordServiceImpl implements ChordService {
 
         } else {
             songChords.add(getNextChord(lastChord));
-
         }
+
         System.out.println("==============");
         System.out.println(songChords);
 
@@ -144,7 +152,6 @@ public class ChordServiceImpl implements ChordService {
             case 0:
                 nextRoot = lastRoot;
                 break;
-
             case 1:
                 nextRoot = "C";
                 break;
@@ -168,6 +175,7 @@ public class ChordServiceImpl implements ChordService {
                 break;
 
             default:
+                //This is bad!
                 nextRoot = "Q";
         }
         return nextRoot;
@@ -200,8 +208,17 @@ public class ChordServiceImpl implements ChordService {
 
     public List<String> generateProgression_1454(String key) {
         List<String> songChords = new ArrayList<>();
-        ChordProgression cp = new ChordProgression("I IV V IV");
+        ChordProgression cp = new ChordProgression("I IV V IV I IV V IV");
         cp.setKey(key);
+
+        Pattern pat1454 = new Pattern(cp);
+        try {
+            MidiFileManager
+                    .savePatternToMidi(pat1454, new File("pat1454.mid"));
+        } catch (IOException ex) {
+            System.out.println("IO exception whilst saving!");
+        }
+        ConvertFile("pat1454.mid", "pat1454.wav");
 
         //Use jFugue to convert our generic progression to human readable chords list
         for (Chord chord : cp.getChords()) {
@@ -234,15 +251,25 @@ public class ChordServiceImpl implements ChordService {
             String finishedChord = root + ext;
             //Add it to the list
             songChords.add(finishedChord);
-
         }
         return songChords;
     }
 
     public List<String> generateProgression_1564(String key) {
         List<String> songChords = new ArrayList<>();
-        ChordProgression cp = new ChordProgression("I V vi IV");
+        ChordProgression cp = new ChordProgression("I V vi IV I V vi IV");
         cp.setKey(key);
+
+        Pattern pat1564 = new Pattern(cp);
+        try {
+            MidiFileManager
+                    .savePatternToMidi(pat1564, new File("pat1564.mid"));
+        } catch (IOException ex) {
+            System.out.println("IO exception whilst saving!");
+        }
+        ConvertFile("pat1564.mid", "pat1564.wav");
+
+
 
         for (Chord chord : cp.getChords()) {
             String original = chord.toHumanReadableString();
@@ -277,8 +304,17 @@ public class ChordServiceImpl implements ChordService {
 
     public List<String> generateProgression_1645(String key) {
         List<String> songChords = new ArrayList<>();
-        ChordProgression cp = new ChordProgression("I V vi IV");
+        ChordProgression cp = new ChordProgression("I vi IV V I vi IV V");
         cp.setKey(key);
+
+        Pattern pat1645 = new Pattern(cp);
+        try {
+            MidiFileManager
+                    .savePatternToMidi(pat1645, new File("pat1645.mid"));
+        } catch (IOException ex) {
+            System.out.println("IO exception whilst saving!");
+        }
+        ConvertFile("pat1645.mid", "pat1645.wav");
 
         for (Chord chord : cp.getChords()) {
             String original = chord.toHumanReadableString();
@@ -308,10 +344,19 @@ public class ChordServiceImpl implements ChordService {
         }
         return songChords;
     }
-    public List<String> generateProgression_12bar(String key){
+    public List<String> generateProgression_12bar(String key) {
         List<String> songChords = new ArrayList<>();
-        ChordProgression cp = new ChordProgression("I I I I IV IV I I V IV I V").distribute("7%6");
+        ChordProgression cp = new ChordProgression("IDOM7 IDOM7 IDOM7 IDOM7 IVDOM7 IVDOM7 IDOM7 IDOM7 VDOM7 IVDOM7 IDOM7 IDOM7");
         cp.setKey(key);
+
+        Pattern blues = new Pattern(cp);
+        try {
+            MidiFileManager
+                    .savePatternToMidi(blues, new File("Blues.mid"));
+        } catch (IOException ex) {
+            System.out.println("IO exception whilst saving!");
+        }
+        ConvertFile("Blues.mid", "Blues.wav");
 
         for (Chord chord : cp.getChords()) {
             String original = chord.toHumanReadableString();
@@ -335,11 +380,65 @@ public class ChordServiceImpl implements ChordService {
                 default:
                     ext = "";
             }
-            String finishedChord = root + ext;
+            String finishedChord = root + ext + "7";
             songChords.add(finishedChord);
 
         }
         return songChords;
+    }
+
+    //Convert .mid to .wav for playback
+    public static void ConvertFile(String inputPath,
+                                   String outputPath) {
+        AudioFileFormat inFileFormat;
+        File inFile;
+        File outFile;
+        try {
+            inFile = new File(inputPath);
+            outFile = new File(outputPath);
+        } catch (NullPointerException ex) {
+            System.out.println("Error: one of the ConvertFile to wav" +" parameters is null!");
+            return;
+        }
+        try {
+            // query file type
+            inFileFormat = AudioSystem.getAudioFileFormat(inFile);
+            if (inFileFormat.getType() != AudioFileFormat.Type.WAVE)
+            {
+                // inFile is not wav, so let's try to convert it.
+                AudioInputStream inFileAIS =
+                        AudioSystem.getAudioInputStream(inFile);
+                //inFileAIS.reset(); // rewind
+                if (AudioSystem.isFileTypeSupported(
+                        AudioFileFormat.Type.WAVE, inFileAIS)) {
+                    // inFileAIS can be converted to wav.
+                    // so write the AudioInputStream to the
+                    // output file.
+                    AudioSystem.write(inFileAIS,
+                            AudioFileFormat.Type.WAVE, outFile);
+                    System.out.println("Successfully made wav file, "
+                            + outFile.getPath() + ", from "
+                            + inFileFormat.getType() + " file, " +
+                            inFile.getPath() + ".");
+                    inFileAIS.close();
+                    return; // All done now
+                } else
+                    System.out.println("Warning: wav conversion of "
+                            + inFile.getPath()
+                            + " is not currently supported by AudioSystem.");
+            } else
+                System.out.println("Input file " + inFile.getPath() +
+                        " is wav." + " Conversion is unnecessary.");
+        } catch (UnsupportedAudioFileException e) {
+            System.out.println("Error: " + inFile.getPath()
+                    + " is not a supported audio file type!");
+            return;
+        } catch (IOException e) {
+            System.out.println("Error: failure attempting to read "
+                    + inFile.getPath() + "!");
+            e.printStackTrace();
+            return;
+        }
     }
 
 

@@ -19,6 +19,7 @@ public class KeyServiceImpl implements KeyService{
 
         switch (key) {
             case "C":
+                chords.add("C7");
                 chords.add("G7");
                 chords.add("Bo");
                 break;
@@ -26,16 +27,19 @@ public class KeyServiceImpl implements KeyService{
             case "G":
                 chords.add("D7");
                 chords.add("F#o");
+                chords.add("G7");
                 break;
 
             case "D":
                 chords.add("A7");
                 chords.add("C#o");
+                chords.add("D7");
                 break;
 
             case "A":
 
                 chords.add("G#o");
+                chords.add("A7");
                 break;
 
             case "E":
@@ -107,6 +111,9 @@ public class KeyServiceImpl implements KeyService{
                 break;
 
             default:
+                chords.add("Am");
+                chords.add("Bm");
+                chords.add("Em");
                 chords.add("C");
                 chords.add("G");
                 chords.add("D");
