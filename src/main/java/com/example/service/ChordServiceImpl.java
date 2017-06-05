@@ -58,6 +58,26 @@ public class ChordServiceImpl implements ChordService {
 
         }
         System.out.println("chords -> " + chords);
+        System.out.println("=============================");
+
+        //1 4 5
+        System.out.println("12 bar blues");
+        System.out.println(generateProgression_12bar(key)+ "\n");
+
+        //1 4 5 4
+        System.out.println("Pop Rock I IV V IV | e.g. With or Without You, Under the Bridge ");
+        System.out.println(generateProgression_1454(key) + "\n");
+
+        // 1 5 6 4
+        System.out.println("I V vi IV | e.g.  Let it Be/ Beast of Burden");
+        System.out.println(generateProgression_1564(key)+ "\n");
+
+        //1 6 4 5
+        System.out.println("I vi IV V |  e.g. Stand by Me");
+        System.out.println(generateProgression_1645(key)+ "\n");
+
+
+
         return chords;
     }
 
@@ -290,7 +310,7 @@ public class ChordServiceImpl implements ChordService {
     }
     public List<String> generateProgression_12bar(String key){
         List<String> songChords = new ArrayList<>();
-        ChordProgression cp = new ChordProgression("I I I I IV IV I I V IV I V");
+        ChordProgression cp = new ChordProgression("I I I I IV IV I I V IV I V").distribute("7%6");
         cp.setKey(key);
 
         for (Chord chord : cp.getChords()) {
