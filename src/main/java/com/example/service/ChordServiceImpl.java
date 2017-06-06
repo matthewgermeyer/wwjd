@@ -70,19 +70,19 @@ public class ChordServiceImpl implements ChordService {
 
         //1 4 5
         System.out.println("12 bar blues");
-        System.out.println(generateProgression_12bar(key)+ "\n");
+        System.out.println(generateBlues(key)+ "\n");
 
         //1 4 5 4
         System.out.println("Pop Rock I IV V IV | e.g. With or Without You, Under the Bridge ");
-        System.out.println(generateProgression_1454(key) + "\n");
+        System.out.println(generateSimpleRock(key) + "\n");
 
         // 1 5 6 4
         System.out.println("I V vi IV | e.g.  Let it Be/ Beast of Burden");
-        System.out.println(generateProgression_1564(key)+ "\n");
+        System.out.println(generatePopRock(key)+ "\n");
 
         //1 6 4 5
         System.out.println("I vi IV V |  e.g. Stand by Me");
-        System.out.println(generateProgression_1645(key)+ "\n");
+        System.out.println(generateSoulful(key)+ "\n");
 
 
 
@@ -206,19 +206,19 @@ public class ChordServiceImpl implements ChordService {
     }
 
 
-    public List<String> generateProgression_1454(String key) {
+    public List<String> generateSimpleRock(String key) {
         List<String> songChords = new ArrayList<>();
         ChordProgression cp = new ChordProgression("I IV V IV I IV V IV");
         cp.setKey(key);
 
-        Pattern pat1454 = new Pattern(cp);
+        Pattern simpleRock = new Pattern(cp);
         try {
             MidiFileManager
-                    .savePatternToMidi(pat1454, new File("pat1454.mid"));
+                    .savePatternToMidi(simpleRock, new File("simpleRock.mid"));
         } catch (IOException ex) {
             System.out.println("IO exception whilst saving!");
         }
-        ConvertFile("pat1454.mid", "pat1454.wav");
+        ConvertFile("simpleRock.mid", "simpleRock.wav");
 
         //Use jFugue to convert our generic progression to human readable chords list
         for (Chord chord : cp.getChords()) {
@@ -255,19 +255,19 @@ public class ChordServiceImpl implements ChordService {
         return songChords;
     }
 
-    public List<String> generateProgression_1564(String key) {
+    public List<String> generatePopRock(String key) {
         List<String> songChords = new ArrayList<>();
         ChordProgression cp = new ChordProgression("I V vi IV I V vi IV");
         cp.setKey(key);
 
-        Pattern pat1564 = new Pattern(cp);
+        Pattern popRock = new Pattern(cp);
         try {
             MidiFileManager
-                    .savePatternToMidi(pat1564, new File("pat1564.mid"));
+                    .savePatternToMidi(popRock, new File("popRock.mid"));
         } catch (IOException ex) {
             System.out.println("IO exception whilst saving!");
         }
-        ConvertFile("pat1564.mid", "pat1564.wav");
+        ConvertFile("popRock.mid", "popRock.wav");
 
 
 
@@ -302,19 +302,19 @@ public class ChordServiceImpl implements ChordService {
 
     }
 
-    public List<String> generateProgression_1645(String key) {
+    public List<String> generateSoulful(String key) {
         List<String> songChords = new ArrayList<>();
         ChordProgression cp = new ChordProgression("I vi IV V I vi IV V");
         cp.setKey(key);
 
-        Pattern pat1645 = new Pattern(cp);
+        Pattern soulful = new Pattern(cp);
         try {
             MidiFileManager
-                    .savePatternToMidi(pat1645, new File("pat1645.mid"));
+                    .savePatternToMidi(soulful, new File("soulful.mid"));
         } catch (IOException ex) {
             System.out.println("IO exception whilst saving!");
         }
-        ConvertFile("pat1645.mid", "pat1645.wav");
+        ConvertFile("soulful.mid", "soulful.wav");
 
         for (Chord chord : cp.getChords()) {
             String original = chord.toHumanReadableString();
@@ -344,7 +344,7 @@ public class ChordServiceImpl implements ChordService {
         }
         return songChords;
     }
-    public List<String> generateProgression_12bar(String key) {
+    public List<String> generateBlues(String key) {
         List<String> songChords = new ArrayList<>();
         ChordProgression cp = new ChordProgression("IDOM7 IDOM7 IDOM7 IDOM7 IVDOM7 IVDOM7 IDOM7 IDOM7 VDOM7 IVDOM7 IDOM7 IDOM7");
         cp.setKey(key);
@@ -352,11 +352,11 @@ public class ChordServiceImpl implements ChordService {
         Pattern blues = new Pattern(cp);
         try {
             MidiFileManager
-                    .savePatternToMidi(blues, new File("Blues.mid"));
+                    .savePatternToMidi(blues, new File("blues.mid"));
         } catch (IOException ex) {
             System.out.println("IO exception whilst saving!");
         }
-        ConvertFile("Blues.mid", "Blues.wav");
+        ConvertFile("blues.mid", "blues.wav");
 
         for (Chord chord : cp.getChords()) {
             String original = chord.toHumanReadableString();
@@ -394,8 +394,8 @@ public class ChordServiceImpl implements ChordService {
         File inFile;
         File outFile;
         try {
-            inFile = new File(inputPath);
-            outFile = new File(outputPath);
+            inFile = new File( inputPath);
+            outFile = new File("target/classes/static/" + outputPath);
         } catch (NullPointerException ex) {
             System.out.println("Error: one of the ConvertFile to wav" +" parameters is null!");
             return;

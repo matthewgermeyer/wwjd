@@ -37,24 +37,31 @@ public class JimiController {
                                  @RequestParam(value = "genre", required = true) String genre,
                                  Model model) {
         List<String> songChords;
-
         switch (genre){
-
             case "blues":
-                songChords = chordService.generateProgression_12bar(key);
+                songChords = chordService.generateBlues(key);
                 break;
             case "popRock":
-                songChords = chordService.generateProgression_1564(key);
+                songChords = chordService.generatePopRock(key);
                 break;
             case "soulful":
-                songChords = chordService.generateProgression_1645(key);
+                songChords = chordService.generateSoulful(key);
                 break;
             case "classicRock":
-                songChords = chordService.generateProgression_1454(key);
+                songChords = chordService.generateSimpleRock(key);
                 break;
-
             default:
-                songChords = chordService.generateProgression_12bar(key);
+                songChords = chordService.generateBlues(key);
+        }
+        if (genre.equals("classicRock")){
+            model.addAttribute("genre", "Simple Rock");
+
+        } else if (genre.equals("blues")){
+            model.addAttribute("genre", "blues");
+        } else if (genre.equals("popRock")){
+            model.addAttribute("genre","Pop-Rock");
+        } else {
+            model.addAttribute("genre","Soulful tune");
         }
 
         model.addAttribute("key", key);
@@ -62,7 +69,6 @@ public class JimiController {
 
         return "song";
     }
-
 
     @PostMapping("/song")
     public String addChordToSong(@RequestParam(value = "key", required = true) String key,
@@ -87,8 +93,6 @@ public class JimiController {
 
         return "song";
     }
-
-
 
     @PostMapping("/jimi")
     public String addJimiChord(@RequestParam(value = "key", required = true) String key,

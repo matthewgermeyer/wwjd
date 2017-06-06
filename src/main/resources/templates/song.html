@@ -25,66 +25,57 @@
     <div class="col-sm-4"></div>
 </div>
 
-
-<form action="/song" id="formId" method="post">
-    <input type="hidden" name="key" th:value="${key}"/>
-    <!--<select name="chord">-->
-        <!--<option value="#">Select a chord</option>-->
-        <!--<option th:each="chords : ${chords}"-->
-                <!--th:value="${chords}"-->
-                <!--th:text="${chords}"></option>-->
-    <!--</select>-->
-    <!--<br/>-->
-    <!--<input type="checkbox" name="songChords"-->
-           <!--th:each="songChord : ${songChords}"-->
-           <!--th:text="${songChord} + ' | '"-->
-           <!--th:value="${songChord}"-->
-           <!--checked="checked"/><br/>-->
-    <!--<br/>-->
-
+<div class = "row">
+    <br/>
+    <br/>
+    <br/>
+</div>
 
     <h2 class = "text-center"> <span th:each="songChord : ${songChords}"
               th:text=" ${songChord} + '  |  ' "></span>
 
+        <!--Play {genre} button-->
+        <button class="btn btn-primary btn-lg" id="playId" th:if ="${genre} != null" th:text="'Play ' + ${genre} "></button>
     </h2>
 
-
-
-    <!--<input class="btn btn-primary btn-md" role="button" type="submit" value="Add list Chord"/>-->
+<div class = "row">
     <br/>
-</form>
+    <br/>
+    <br/>
+</div>
 
-<!--//Generate song snippets-->
+<!--Generate song Buttons-->
 <div class="row">
-    <!--<div class="col-sm-2"><button class="btn btn-info btn-md" role="button" id="addJimiId">Add Jimi Chord</button></div>-->
-
     <div class="col-sm-3">
         <a href="#" th:href="@{/genre(key=${key},genre=blues)}">
-        <button class="btn btn-success btn-md" role="button">Gimme the Blues!</button></a>
+        <button class="btn btn-success btn-lg" role="button">Gimme the Blues!</button></a>
     </div>
 
     <div class="col-sm-3">
         <a href="#" th:href="@{/genre(key=${key},genre=popRock)}">
-            <button class="btn btn-success btn-md" role="button">Pop - Rock</button></a>
+            <button class="btn btn-success btn-lg" role="button">Pop - Rock</button></a>
     </div>
 
     <div class="col-sm-3">
         <a href="#" th:href="@{/genre(key=${key},genre=soulful)}">
-            <button class="btn btn-success btn-md" role="button">Soulful tune </button></a>
+            <button class="btn btn-success btn-lg" role="button">Soulful tune </button></a>
     </div>
 
     <div class="col-sm-3">
         <a href="#" th:href="@{/genre(key=${key},genre=classicRock)}">
-            <button class="btn btn-success btn-md" role="button">Simple Rock!</button></a>
+            <button class="btn btn-success btn-lg" role="button">Simple Rock!</button></a>
     </div>
-
 </div>
 
+<div class = "row">
+    <br/>
+    <br/>
+    <br/>
+</div>
 
+<!--Get in Touch Banner-->
 <div class="banner">
-
     <div class="container">
-
         <div class="row">
             <div class="col-lg-6">
                 <h2>Get in touch with Matt!</h2>
@@ -103,15 +94,10 @@
                 </ul>
             </div>
         </div>
-
     </div>
     <!-- /.container -->
-
 </div>
 <!-- /.banner -->
-
-
-
 <!-- Footer -->
 <footer>
     <div class="container">
@@ -139,13 +125,9 @@
         </div>
     </div>
 </footer>
-
-
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
-
-
 </body>
 </html>

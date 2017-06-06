@@ -13,10 +13,10 @@ public interface ChordService {
      String getNextChord(String lastChord);
      String getNextExt();
 
-     List<String> generateProgression_1454(String key);
-     List<String> generateProgression_1564(String key);
-     List<String> generateProgression_1645(String key);
-     List<String> generateProgression_12bar(String key);
+     List<String> generateSimpleRock(String key);
+     List<String> generatePopRock(String key);
+     List<String> generateSoulful(String key);
+     List<String> generateBlues(String key);
 
 
 }
