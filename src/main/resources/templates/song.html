@@ -21,7 +21,7 @@
 
 <div class="row">
     <div class="col-sm-4"></div>
-    <div class="col-sm-4"> <h2>Let's generate a tune in <span th:text="${key} + '!'"></span></h2></div>
+    <div class="col-sm-4"> <h2>Generate a tune in <span th:text="${key} + '!'"></span></h2></div>
     <div class="col-sm-4"></div>
 </div>
 
@@ -48,7 +48,7 @@
 <div class="row">
     <div class="col-sm-3">
         <a href="#" th:href="@{/genre(key=${key},genre=blues)}">
-        <button class="btn btn-success btn-lg" role="button">Gimme the Blues!</button></a>
+        <button class="btn btn-success btn-lg" role="button">Blues!</button></a>
     </div>
 
     <div class="col-sm-3">
@@ -58,7 +58,7 @@
 
     <div class="col-sm-3">
         <a href="#" th:href="@{/genre(key=${key},genre=soulful)}">
-            <button class="btn btn-success btn-lg" role="button">Soulful tune </button></a>
+            <button class="btn btn-success btn-lg" role="button">Soulful</button></a>
     </div>
 
     <div class="col-sm-3">

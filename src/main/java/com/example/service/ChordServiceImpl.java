@@ -346,7 +346,7 @@ public class ChordServiceImpl implements ChordService {
     }
     public List<String> generateBlues(String key) {
         List<String> songChords = new ArrayList<>();
-        ChordProgression cp = new ChordProgression("IDOM7 IDOM7 IDOM7 IDOM7 IVDOM7 IVDOM7 IDOM7 IDOM7 VDOM7 IVDOM7 IDOM7 IDOM7");
+        ChordProgression cp = new ChordProgression("I I I I IV IV I I V IV I IV");
         cp.setKey(key);
 
         Pattern blues = new Pattern(cp);
