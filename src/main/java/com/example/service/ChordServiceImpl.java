@@ -37,12 +37,12 @@ public class ChordServiceImpl implements ChordService {
             String original = chord.toHumanReadableString();
             String root = original.substring(0, 2);
 
-            //First gather and clean up the root
+            //First gather the root
             //Drop off the number (3, 4 or 5) that represents the octave of the root.
             if (root.substring(1, 2).equals("4") || root.substring(1, 2).equals("5") || root.substring(1, 2).equals("3")) {
                 root = root.substring(0, 1);
             }
-            //Gather the root, ensure it's lowercase
+            //Gather the extension
             String ext = original.substring(original.length() - 3);
             ext = ext.toLowerCase();
 
@@ -68,23 +68,21 @@ public class ChordServiceImpl implements ChordService {
         System.out.println("chords -> " + chords);
         System.out.println("=============================");
 
-        //1 4 5
+        //blues
         System.out.println("12 bar blues");
         System.out.println(generateBlues(key)+ "\n");
 
-        //1 4 5 4
-        System.out.println("Pop Rock I IV V IV | e.g. With or Without You, Under the Bridge ");
+        //simple rock
+        System.out.println("Simple Rock I IV V IV | e.g. With or Without You, Under the Bridge ");
         System.out.println(generateSimpleRock(key) + "\n");
 
-        // 1 5 6 4
+        // Pop Rock
         System.out.println("I V vi IV | e.g.  Let it Be/ Beast of Burden");
         System.out.println(generatePopRock(key)+ "\n");
 
-        //1 6 4 5
+        //Soulful
         System.out.println("I vi IV V |  e.g. Stand by Me");
         System.out.println(generateSoulful(key)+ "\n");
-
-
 
         return chords;
     }
@@ -356,6 +354,8 @@ public class ChordServiceImpl implements ChordService {
         } catch (IOException ex) {
             System.out.println("IO exception whilst saving!");
         }
+        System.out.println("===============");
+        System.out.println("calling convertFile");
         ConvertFile("blues.mid", "blues.wav");
 
         for (Chord chord : cp.getChords()) {
@@ -390,6 +390,7 @@ public class ChordServiceImpl implements ChordService {
     //Convert .mid to .wav for playback
     public static void ConvertFile(String inputPath,
                                    String outputPath) {
+
         AudioFileFormat inFileFormat;
         File inFile;
         File outFile;
@@ -440,7 +441,6 @@ public class ChordServiceImpl implements ChordService {
             return;
         }
     }
-
 
 }
 

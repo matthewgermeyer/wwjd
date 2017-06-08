@@ -16,8 +16,42 @@
     <script src="/js/jquery.js"></script>
     <script src="/js/wwjd.js"></script>
 </head>
-
 <body>
+ <!--Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+    <div class="container topnav">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand topnav" href="/">WWJP?</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <b class = "caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Preferences</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<br/>
+<br/>
+<br/>
+
 
 <div class="row">
     <div class="col-sm-4"></div>
@@ -35,7 +69,12 @@
               th:text=" ${songChord} + '  |  ' "></span>
 
         <!--Play {genre} button-->
-        <button class="btn btn-primary btn-lg" id="playId" th:if ="${genre} != null" th:text="'Play ' + ${genre} "></button>
+        <button class="btn btn-primary btn-lg " id="playId" th:if ="${genre} != null" th:text="'Play ' + ${genretext} " ></button>
+
+        <a th:href="@{/newSong(key=${key},genre=${genre})}" th:if ="${genre} != null">
+            <button class="btn btn-danger btn-lg" >Save!!!</button>
+        </a>
+
     </h2>
 
 <div class = "row">
@@ -120,7 +159,8 @@
                         <a href="#contact">Contact</a>
                     </li>
                 </ul>
-                <p class="copyright text-muted small">Copyright &copy; TraneCo 2017. All Rights Reserved</p>
+                <p class="copyright text-muted small">Copyright &copy; TraneCo 2017. All Rights Reserved - Song page.</p>
+
             </div>
         </div>
     </div>
