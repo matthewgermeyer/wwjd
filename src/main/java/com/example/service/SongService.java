@@ -10,6 +10,9 @@ import java.util.List;
 public interface SongService {
 
     void add(Song song);
+    void add(String title, String key, String genre);
     List<Song> findAllByUsername(String username);
+    List<Song> findAllByUsername();
+
 
 }

@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.domain.Song;
 import com.example.service.ChordService;
 import com.example.service.KeyService;
 import com.example.service.SongService;
@@ -146,49 +147,26 @@ public class JimiController {
         model.addAttribute("key", key);
         model.addAttribute("songChords", songChords);
 
-        return "management";
+        return "namesong";
     }
 
-    @PostMapping("/management")
-    public String giveNewSongItsTitle(
+    @PostMapping("/save")
+    public String giveNewSongItsTitleSave(
             @RequestParam(value = "key", required = true) String key,
             @RequestParam(value = "genre", required = true) String genre,
             @RequestParam(value = "title", required = true) String title,
                                Model model) {
 
-        List<String> songChords;
-        switch (genre){
-            case "blues":
-                songChords = chordService.generateBlues(key);
-                break;
-            case "popRock":
-                songChords = chordService.generatePopRock(key);
-                break;
-            case "soulful":
-                songChords = chordService.generateSoulful(key);
-                break;
-            case "classicRock":
-                songChords = chordService.generateSimpleRock(key);
-                break;
-            default:
-                songChords = chordService.generateBlues(key);
-        }
-        if (genre.equals("classicRock")){
-            model.addAttribute("genretext", "Simple Rock");
+        //add the song given 3 parameters
+        songService.add(title, key, genre);
+        //get list of songs from songservice
+        List<Song> songs = songService.findAllByUsername();
 
-        } else if (genre.equals("blues")){
-            model.addAttribute("genretext", "blues");
-        } else if (genre.equals("popRock")){
-            model.addAttribute("genretext","Pop-Rock");
-        } else {
-            model.addAttribute("genretext","Soulful tune");
-        }
+        //add them to the model
+        model.addAttribute("songs",songs);
+        //return management Thymeleaf page.
 
-        model.addAttribute("genre", genre);
-        model.addAttribute("key", key);
-        model.addAttribute("songChords", songChords);
-
-        return "management";
+        return "songmanagement";
     }
 
 //    @PostMapping("/jimi")
