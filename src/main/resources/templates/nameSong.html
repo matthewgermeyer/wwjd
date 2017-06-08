@@ -29,7 +29,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand topnav" href="/">WWJP?</a>
+            <a class="navbar-brand topnav" href="/project">WWJP?</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -58,7 +58,7 @@
 
 <div class="row">
     <div class="col-sm-4"></div>
-    <div class="col-sm-4"> <h2> Here are your songs!</h2></div>
+    <div class="col-sm-4"> <h2> Give it a Title! </h2></div>
     <div class="col-sm-4"></div>
 </div>
 
@@ -80,9 +80,10 @@
         <h3>Give it a title! </h3><br/>
         <input type="hidden" name="key" th:value="${key}"/>
         <input type="hidden" name="genre" th:value="${genre}"/>
-        <input type="text" name="title" value="your title here"/>
+        <input type="text" name="title" placeholder="your title"/>
             <br/>
-        <input type="submit" value="Save it!!"/>
+        <input class= "btn btn-primary btn-md" type="submit" value="
+        Save it!!"/>
     </form></div>
     <div class="col-sm-4"></div>
 </div>
@@ -141,7 +142,7 @@
                         <a href="#contact">Contact</a>
                     </li>
                 </ul>
-                <p class="copyright text-muted small">Copyright &copy; TraneCo 2017. All Rights Reserved - Management pg</p>
+                <p class="copyright text-muted small">Copyright &copy; TraneCo 2017. All Rights Reserved</p>
             </div>
         </div>
     </div>
