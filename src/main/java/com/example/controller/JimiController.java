@@ -85,30 +85,6 @@ public class JimiController {
         return "song";
     }
 
-    @PostMapping("/song")
-    public String addChordToSong(
-            @RequestParam(value = "key", required = true) String key,
-            @RequestParam(value = "chord", required = true) String chord,
-            @RequestParam(value = "songChords", required = false) List<String> songChords, Model model) {
-
-        if (songChords == null){
-            songChords = new ArrayList<>();
-        }
-        songChords.add(chord);
-
-        List<String> suggestedChords = keyService.getVandVIIChordsFromKey(key);
-        suggestedChords.addAll(chordService.getBasicChords(key));
-        //Convert to a set to remove any duplications
-        Set<String> suggestedChordSet = new TreeSet<>(suggestedChords);
-
-        model.addAttribute("chords", suggestedChordSet);
-        model.addAttribute("key", key);
-        model.addAttribute("songChords", songChords);
-
-        return "song";
-    }
-
-
     @RequestMapping("/newSong")
     public String save(@RequestParam(value = "key", required = true) String key,
                        @RequestParam(value = "genre", required = true) String genre,
@@ -141,13 +117,10 @@ public class JimiController {
         } else {
             model.addAttribute("genretext","Soulful tune");
         }
-
-
         model.addAttribute("genre", genre);
         model.addAttribute("key", key);
         model.addAttribute("songChords", songChords);
-
-        return "namesong";
+        return "nameSong";
     }
 
     @PostMapping("/save")
@@ -162,46 +135,62 @@ public class JimiController {
         //get list of songs from songservice
         List<Song> songs = songService.findAllByUsername();
 
-        //add them to the model
-        model.addAttribute("songs",songs);
-        //return management Thymeleaf page.
 
-        return "songmanagement";
+        model.addAttribute("songs",songs);
+
+
+        return "songManagement";
     }
 
     @GetMapping("/manageSongs")
-    public String giveNewSongItsTitleSave(Model model) {
-
+    public String seeAllSongsForUser(Model model) {
         List<Song> songs = songService.findAllByUsername();
 
-        //add them to the model
-        model.addAttribute("songs",songs);
-        //return management Thymeleaf page.
 
-        return "songmanagement";
+
+        model.addAttribute("songs", songService.findAllByUsername());
+
+        return "songManagement";
+    }
+
+    @PostMapping("/song")
+    public String addChordToSong(
+            @RequestParam(value = "key", required = true) String key,
+            @RequestParam(value = "chord", required = true) String chord,
+            @RequestParam(value = "songChords", required = false) List<String> songChords, Model model) {
+
+        if (songChords == null){
+            songChords = new ArrayList<>();
+        }
+        songChords.add(chord);
+
+        List<String> suggestedChords = keyService.getVandVIIChordsFromKey(key);
+        suggestedChords.addAll(chordService.getBasicChords(key));
+        //Convert to a set to remove any duplications
+        Set<String> suggestedChordSet = new TreeSet<>(suggestedChords);
+
+        model.addAttribute("chords", suggestedChordSet);
+        model.addAttribute("key", key);
+        model.addAttribute("songChords", songChords);
+
+        return "song";
     }
 
 //    @PostMapping("/jimi")
 //    public String addJimiChord(@RequestParam(value = "key", required = true) String key,
 //                               @RequestParam(value = "songChords", required = false) List<String> songChords,
 //                               Model model) {
-//
 //        if (songChords == null){
 //            songChords = new ArrayList<>();
 //        }
-//
 //        //Add the next chord via jimiPickNextChord Method.
 //        chordService.jimiPickNextChord(songChords);
-//
 //        List<String> suggestedChords = keyService.getVandVIIChordsFromKey(key);
 //        suggestedChords.addAll(chordService.getBasicChords(key));
-//
 //        Set<String> suggestedChordSet = new TreeSet<>(suggestedChords);
-//
 //        model.addAttribute("chords", suggestedChordSet);
 //        model.addAttribute("key", key);
 //        model.addAttribute("songChords", songChords);
-//
 //        return "song";
 //    }
 }

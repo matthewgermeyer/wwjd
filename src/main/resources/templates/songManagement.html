@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"/>
+    <title>Song Management</title>
+</head>
+<body>
+<!--Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+    <div class="container topnav">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand topnav" href="/">WWJP?</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <b class = "caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/manageSongs">Manage Songs</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+<br/>
+<br/>
+<br/>
+<h2 class = "text-center">Your Tunes!</h2>
+
+<div th:if="${not #lists.isEmpty(songs)}">
+
+    <table class="table table-striped table-bordered table-hover">
+        <tr>
+            <th class="text-center"> Title</th>
+            <th class="text-center"> Chords</th>
+            <th class="text-center"> Key</th>
+            <th class="text-center"> Genre</th>
+        </tr>
+
+        <tr th:each="song:${songs}">
+            <td class="text-center" th:text="${song.title}"></td>
+            <td class="text-center" th:text="${song.chords}"></td>
+            <td class="text-center" th:text="${song.key}"></td>
+            <td class="text-center" th:text="${song.genre}"></td>
+            <td><a href="#" class="btn btn-danger btn-sm">
+                <span class="glyphicon glyphicon-trash"></span> Trash
+            </a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <a href="/project" class="btn btn-info btn-block" role="button" aria-disabled="true">Create Another Tune!</a>
+    </div>
+    <div class="col-sm-4"></div>
+</div>
+
+
+
+
+
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+</body>
+</html>
