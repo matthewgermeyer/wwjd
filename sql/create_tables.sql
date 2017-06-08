@@ -27,6 +27,7 @@ CREATE TABLE `song` (
   `title` varchar(256) NOT NULL,
   `keyy` varchar(256) NOT NULL,
   `genre` varchar(256) NOT NULL,
+  `chords` varchar(256) NOT NULL,
   `username` varchar(256) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_song_username` (`username`),

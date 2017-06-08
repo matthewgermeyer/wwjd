@@ -18,6 +18,8 @@ public class SongServiceImpl implements  SongService{
 
     @Autowired
     SongDao songDao;
+    @Autowired
+    ChordService chordService;
 
     @Override
     @Transactional
@@ -48,11 +50,30 @@ public class SongServiceImpl implements  SongService{
         System.out.println("==================");
         System.out.println(currentPrincipalName);
 
+        List<String> songChords;
+        switch (genre){
+            case "blues":
+                songChords = chordService.generateBlues(key);
+                break;
+            case "popRock":
+                songChords = chordService.generatePopRock(key);
+                break;
+            case "soulful":
+                songChords = chordService.generateSoulful(key);
+                break;
+            case "classicRock":
+                songChords = chordService.generateSimpleRock(key);
+                break;
+            default:
+                songChords = chordService.generateBlues(key);
+        }
+
         Song song = new Song();
         song.setTitle(title);
         song.setKey(key);
         song.setGenre(genre);
         song.setUsername(currentPrincipalName);
+        song.setChords(songChords);
 
         songDao.add(song);
 

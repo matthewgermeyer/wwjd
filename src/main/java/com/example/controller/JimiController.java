@@ -169,6 +169,18 @@ public class JimiController {
         return "songmanagement";
     }
 
+    @GetMapping("/manageSongs")
+    public String giveNewSongItsTitleSave(Model model) {
+
+        List<Song> songs = songService.findAllByUsername();
+
+        //add them to the model
+        model.addAttribute("songs",songs);
+        //return management Thymeleaf page.
+
+        return "songmanagement";
+    }
+
 //    @PostMapping("/jimi")
 //    public String addJimiChord(@RequestParam(value = "key", required = true) String key,
 //                               @RequestParam(value = "songChords", required = false) List<String> songChords,

@@ -1,5 +1,7 @@
 package com.example.domain;
 
+import java.util.List;
+
 /**
  * Created by MattyG on 6/8/17.
  */
@@ -9,6 +11,7 @@ public class Song {
     private String key;
     private String genre;
     private String username;
+    private List<String> chords;
 
     public int getId() {
         return id;
@@ -50,6 +53,14 @@ public class Song {
         this.username = username;
     }
 
+    public List<String> getChords() {
+        return chords;
+    }
+
+    public void setChords(List<String> chords) {
+        this.chords = chords;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -78,6 +89,7 @@ public class Song {
                 ", key='" + key + '\'' +
                 ", genre='" + genre + '\'' +
                 ", username='" + username + '\'' +
+                ", chords=" + chords +
                 '}';
     }
 }
