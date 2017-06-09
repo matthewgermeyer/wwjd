@@ -90,6 +90,8 @@ public class JimiController {
                        @RequestParam(value = "genre", required = true) String genre,
                        Model model) {
 
+        System.out.println("delete this lagter");
+
         List<String> songChords;
         switch (genre){
             case "blues":
