@@ -1,8 +1,10 @@
 package com.example.controller;
 
 import com.example.common.Util;
+import com.example.domain.HookTheorySong;
 import com.example.domain.Song;
 import com.example.service.ChordService;
+import com.example.service.HookTheoryService;
 import com.example.service.KeyService;
 import com.example.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ public class JimiController {
     SongService songService;
     @Autowired
     Util util;
+    @Autowired
+    HookTheoryService hookTheoryService;
 
     @GetMapping("/project")
     public String project() {
@@ -56,10 +60,13 @@ public class JimiController {
 
         List<String>  songChords = util.chordsFromGenre(genre, key);
         util.genreForModel(genre, model);
+        List<HookTheorySong> hookSongs = hookTheoryService.getHookTheorySongs(genre);
+
 
         model.addAttribute("genre", genre);
         model.addAttribute("key", key);
         model.addAttribute("songChords", songChords);
+        model.addAttribute("hookSongs", hookSongs);
 
         return "song";
     }
