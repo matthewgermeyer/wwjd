@@ -13,6 +13,7 @@ public interface SongService {
     void add(String title, String key, String genre);
     List<Song> findAllByUsername(String username);
     List<Song> findAllByUsername();
+    void delete(int id);
 
 
 }

@@ -69,9 +69,13 @@
             <td class="text-center" th:text="${song.chords}"></td>
             <td class="text-center" th:text="${song.key}"></td>
             <td class="text-center" th:text="${song.genre}"></td>
-            <td><a href="#" class="btn btn-danger btn-sm">
-                <span class="glyphicon glyphicon-trash"></span> Trash
-            </a>
+            <td>
+
+                <form th:action="@{/manageSongs/delete}" method="post">
+                    <input type="hidden" th:value="${song.id}" name="songId"/> <input type="Submit" Value="Delete"/>
+                </form>
+
+
             </td>
         </tr>
     </table>
@@ -84,8 +88,6 @@
     </div>
     <div class="col-sm-4"></div>
 </div>
-
-
 
 
 

@@ -10,5 +10,6 @@ import java.util.List;
 public interface SongDao {
     void add(Song song);
     List<Song> findAllByUsername(String username);
+    void delete(int id);
 
 }

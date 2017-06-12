@@ -108,6 +108,15 @@ public class JimiController {
         return "songManagement";
     }
 
+    @PostMapping("/manageSongs/delete")
+    public String deleteSong(@RequestParam(value = "songId", required = true) int songId, Model model) {
+
+        songService.delete(songId);
+        model.addAttribute("songs", songService.findAllByUsername());
+
+        return "songManagement";
+    }
+
     @PostMapping("/song")
     public String addChordToSong(
             @RequestParam(value = "key", required = true) String key,

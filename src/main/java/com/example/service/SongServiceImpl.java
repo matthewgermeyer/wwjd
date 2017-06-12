@@ -79,4 +79,9 @@ public class SongServiceImpl implements  SongService{
 
     }
 
+    @Transactional
+    public void delete(int id){
+        songDao.delete(id);
+    }
+
 }
