@@ -29,7 +29,7 @@ public class ChordServiceImpl implements ChordService {
         ChordProgression cp = new ChordProgression("I ii iii IV V vi ");
         cp.setKey(key);
 
-        System.out.println("==============Get Basic Chords==================");
+        System.out.println("==============Get Basic Chords========");
         System.out.println("getBasicChords in key -> " + key);
 
         //Use jFugue to convert our generic progression to human readable chords list
@@ -66,7 +66,7 @@ public class ChordServiceImpl implements ChordService {
 
         }
         System.out.println("chords -> " + chords);
-        System.out.println("=============================");
+        System.out.println("==============");
 
         //blues
         System.out.println("12 bar blues");
