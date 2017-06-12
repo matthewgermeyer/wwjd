@@ -71,6 +71,7 @@ public class ChordServiceImpl implements ChordService {
         //blues
         System.out.println("12 bar blues");
         System.out.println(generateBlues(key)+ "\n");
+        System.out.println("hi there delete");
 
         //simple rock
         System.out.println("Simple Rock I IV V IV | e.g. With or Without You, Under the Bridge ");
