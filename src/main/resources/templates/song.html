@@ -75,35 +75,6 @@
         </a>
     </h2>
 
- <div th:if="${not #lists.isEmpty(hookSongs)}">
-     <h3 class = "text-center">Songs like this!</h3>
-
-     <table class="table table-striped table-bordered table-hover">
-         <tr>
-             <th class="text-center"> Artist</th>
-             <th class="text-center"> Song</th>
-             <th class="text-center"> Section</th>
-             <th class="text-center"> Link</th>
-         </tr>
-
-         <tr th:each="hookSong:${hookSongs}">
-             <td class="text-center" th:text="${hookSong.artist}"></td>
-             <td class="text-center" th:text="${hookSong.song}"></td>
-             <td class="text-center" th:text="${hookSong.section}"></td>
-             <td class="text-center"><a th:href="${hookSong.url}">HookTheory Tab!</a></td>
-
-
-         </tr>
-     </table>
- </div>
-
-
-
-
-
-
-
-
 
 <div class = "row">
     <br/>
@@ -140,6 +111,25 @@
     <br/>
 </div>
 
+ <div th:if="${not #lists.isEmpty(hookSongs)}">
+     <h3 class = "text-center">Songs like this!</h3>
+
+     <table class="table table-striped table-bordered table-hover">
+         <tr>
+             <th class="text-center"> Artist</th>
+             <th class="text-center"> Song</th>
+             <th class="text-center"> Section</th>
+             <th class="text-center"> Link</th>
+         </tr>
+
+         <tr th:each="hookSong:${hookSongs}">
+             <td class="text-center" th:text="${hookSong.artist}"></td>
+             <td class="text-center" th:text="${hookSong.song}"></td>
+             <td class="text-center" th:text="${hookSong.section}"></td>
+             <td class="text-center"><a th:href="${hookSong.url}">HookTheory Tab!</a></td>
+         </tr>
+     </table>
+ </div>
 
 
 
