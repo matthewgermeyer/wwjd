@@ -35,7 +35,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <b class = "caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/manageSongs">Manage Songs</a></li>
+                        <li><a href="/mySongs">Manage Songs</a></li>
                         <li><a href="/logout">Logout</a></li>
                     </ul>
                 </li>
@@ -70,7 +70,7 @@
             <td class="text-center" th:text="${song.genre}"></td>
             <td>
 
-                <form th:action="@{/manageSongs/delete}" method="post">
+                <form th:action="@{/mySongs/delete}" method="post">
                     <input type="hidden" th:value="${song.id}" name="songId"/> <input type="Submit" Value="Delete"/>
                 </form>
 

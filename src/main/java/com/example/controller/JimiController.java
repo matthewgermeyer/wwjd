@@ -4,7 +4,6 @@ import com.example.common.Util;
 import com.example.domain.Song;
 import com.example.service.ChordService;
 import com.example.service.HookTheoryService;
-import com.example.service.KeyService;
 import com.example.service.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +23,6 @@ import java.util.TreeSet;
 @Controller
 public class JimiController {
 
-    @Autowired
-    KeyService keyService;
     @Autowired
     ChordService chordService;
     @Autowired
@@ -63,7 +60,6 @@ public class JimiController {
         //adds genretext to playbutton in model
         util.genreOnPlayButton(genre, model);
 
-
         model.addAttribute("genre", genre);
         model.addAttribute("key", key);
         model.addAttribute("songChords", songChords);
@@ -99,13 +95,13 @@ public class JimiController {
         return "songManagement";
     }
 
-    @GetMapping("/manageSongs")
-    public String seeAllSongsForUser(Model model) {
+    @GetMapping("/mySongs")
+    public String getAllSongsForUser(Model model) {
         model.addAttribute("songs", songService.findAllByUsername());
         return "songManagement";
     }
 
-    @PostMapping("/manageSongs/delete")
+    @PostMapping("/mySongs/delete")
     public String deleteSong(@RequestParam(value = "songId", required = true) int songId, Model model, HttpServletResponse response) throws IOException {
 
         songService.delete(songId);
@@ -126,8 +122,8 @@ public class JimiController {
         }
         songChords.add(chord);
 
-        List<String> suggestedChords = keyService.getVandVIIChordsFromKey(key);
-        suggestedChords.addAll(chordService.getBasicChords(key));
+        List<String> suggestedChords = chordService.getBasicChords(key);
+
         //Convert to a set to remove any duplications
         Set<String> suggestedChordSet = new TreeSet<>(suggestedChords);
 
