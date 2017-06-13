@@ -29,9 +29,6 @@ public class ChordServiceImpl implements ChordService {
         ChordProgression cp = new ChordProgression("I ii iii IV V vi ");
         cp.setKey(key);
 
-        System.out.println("======Get Basic Chords========");
-        System.out.println("getBasicChords in key -> " + key);
-
         //Use jFugue to convert our generic progression to human readable chords list
         for (Chord chord : cp.getChords()) {
             String original = chord.toHumanReadableString();
@@ -263,8 +260,6 @@ public class ChordServiceImpl implements ChordService {
             System.out.println("IO exception whilst saving!");
         }
         ConvertFile("popRock.mid", "popRock.wav");
-
-
 
         for (Chord chord : cp.getChords()) {
             String original = chord.toHumanReadableString();
