@@ -16,7 +16,8 @@ public class Util {
     @Autowired
     ChordService chordService;
 
-    public List<String> chordsFromGenre(String genre, String key){
+    public List<String> songChordsFromGenre(String genre, String key){
+
         List<String> songChords;
         switch (genre){
             case "blues":
@@ -37,7 +38,8 @@ public class Util {
         return songChords;
     }
 
-    public Model genreForModel(String genre, Model model){
+    //genretext for model
+    public Model genreOnPlayButton(String genre, Model model){
 
         if (genre.equals("classicRock")) {
             model.addAttribute("genretext", "Simple Rock");
@@ -51,6 +53,31 @@ public class Util {
         }
     return model;
     }
+
+    //URL fragment for HookTheory API
+    public String getGenreUrl(String genre){
+    String genreURL;
+
+        switch (genre){
+            case "blues":
+                genreURL ="1,4,5";
+                break;
+            case "popRock":
+                genreURL ="1,5,6,4";
+                break;
+            case "soulful":
+                genreURL ="1,6,4,5";
+                break;
+            case "classicRock":
+                genreURL ="1,4,5,4";
+                break;
+            default:
+                genreURL = "1";
+        }
+
+        return genreURL;
+    }
+
 
 
 }

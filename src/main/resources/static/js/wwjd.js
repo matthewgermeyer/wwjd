@@ -1,21 +1,23 @@
 $( document ).ready(function() {
   $('#playId').click(function() {
 
-    var fileName;
+    var fileName = $(this).attr("key");
     var buttonText = $(this).text().toLowerCase()
     if (buttonText.indexOf("blues")!= -1){
-        fileName = "blues.wav"
+        fileName += "blues.wav"
     } else if (buttonText.indexOf("pop")!= -1) {
-        fileName = "popRock.wav"
+        fileName += "popRock.wav"
     } else if (buttonText.indexOf("soulful")!= -1) {
-        fileName = "soulful.wav"
+        fileName += "soulful.wav"
     } else {
-        fileName = "simpleRock.wav"
+        fileName += "simpleRock.wav"
     }
+    var href = window.location.href
+    href = href.split("/")
+    var url = href[0] + "//" + href[2] + "/wav/" + fileName
 
-
-      var audio = new Audio('http://localhost:8080/' + fileName);
-        audio.play();
+    var audio = new Audio(url);
+    audio.play();
   });
 });
 

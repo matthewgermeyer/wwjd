@@ -29,7 +29,7 @@ public class ChordServiceImpl implements ChordService {
         ChordProgression cp = new ChordProgression("I ii iii IV V vi ");
         cp.setKey(key);
 
-        System.out.println("==============Get Basic Chords========");
+        System.out.println("======Get Basic Chords========");
         System.out.println("getBasicChords in key -> " + key);
 
         //Use jFugue to convert our generic progression to human readable chords list
@@ -59,9 +59,8 @@ public class ChordServiceImpl implements ChordService {
                 default:
                     ext = "";
             }
-            //Assemble the finished chord
+
             String finishedChord = root + ext;
-            //Add it to the list
             chords.add(finishedChord);
 
         }
@@ -90,7 +89,6 @@ public class ChordServiceImpl implements ChordService {
     @Override
     public List<String> addSuggestedChord(String key, List<String> songChords) {
         System.out.println("=============");
-        System.out.println("entering addSuggestedChord");
         List<String> chords = new ArrayList<>();
         ChordProgression cp = new ChordProgression("I");
         cp.setKey(key);
@@ -202,7 +200,6 @@ public class ChordServiceImpl implements ChordService {
         }
         return nextExt;
     }
-
 
     public List<String> generateSimpleRock(String key) {
         List<String> songChords = new ArrayList<>();
@@ -387,7 +384,7 @@ public class ChordServiceImpl implements ChordService {
         return songChords;
     }
 
-    //Convert .mid to .wav for playback
+    //Convert .mid -> .wav for playback
     public static void ConvertFile(String inputPath,
                                    String outputPath) {
 

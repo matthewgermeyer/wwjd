@@ -1,7 +1,6 @@
 package com.example.controller;
 
 import com.example.common.Util;
-import com.example.domain.HookTheorySong;
 import com.example.domain.Song;
 import com.example.service.ChordService;
 import com.example.service.HookTheoryService;
@@ -46,8 +45,8 @@ public class JimiController {
         return "login";
     }
 
-    @PostMapping("/key")
-    public String songPageFromKey(@RequestParam(value = "key",
+    @PostMapping("/project/key")
+    public String songInKey(@RequestParam(value = "key",
             required = true) String key, Model model) {
         List<String> chords = chordService.getBasicChords(key);
         model.addAttribute("chords", chords);
@@ -56,19 +55,19 @@ public class JimiController {
     }
 
     @GetMapping("/genre")
-    public String getGenre(
-            @RequestParam(value = "key", required = true) String key,@RequestParam(value = "genre", required = true) String genre,
-                           Model model) {
+    public String getSonginGenre(
+            @RequestParam(value = "key", required = true) String key,@RequestParam(value = "genre", required = true) String genre, Model model) {
 
-        List<String>  songChords = util.chordsFromGenre(genre, key);
-        util.genreForModel(genre, model);
-        List<HookTheorySong> hookSongs = hookTheoryService.getHookTheorySongs(genre);
+        List<String> songChords = util.songChordsFromGenre(genre, key);
+
+        //adds genretext to playbutton in model
+        util.genreOnPlayButton(genre, model);
 
 
         model.addAttribute("genre", genre);
         model.addAttribute("key", key);
         model.addAttribute("songChords", songChords);
-        model.addAttribute("hookSongs", hookSongs);
+        model.addAttribute("hookSongs", hookTheoryService.getHookTheorySongs(genre));
 
         return "song";
     }
@@ -78,8 +77,8 @@ public class JimiController {
                        @RequestParam(value = "genre", required = true) String genre,
                        Model model) {
 
-        List<String> songChords = util.chordsFromGenre(genre, key);
-        util.genreForModel(genre, model);
+        List<String> songChords = util.songChordsFromGenre(genre, key);
+        util.genreOnPlayButton(genre, model);
 
         model.addAttribute("genre", genre);
         model.addAttribute("key", key);
@@ -88,16 +87,13 @@ public class JimiController {
     }
 
     @PostMapping("/save")
-    public String giveNewSongItsTitleSave(
+    public String saveSongTitle(
             @RequestParam(value = "key", required = true) String key,
             @RequestParam(value = "genre", required = true) String genre,
             @RequestParam(value = "title", required = true) String title,
             Model model) {
 
-        //add the song given 3 parameters
         songService.add(title, key, genre);
-
-        //get list of songs from songservice
         List<Song> songs = songService.findAllByUsername();
         model.addAttribute("songs", songs);
         return "songManagement";
@@ -106,7 +102,6 @@ public class JimiController {
     @GetMapping("/manageSongs")
     public String seeAllSongsForUser(Model model) {
         model.addAttribute("songs", songService.findAllByUsername());
-
         return "songManagement";
     }
 

@@ -12,7 +12,6 @@ import java.util.List;
 public class KeyServiceImpl implements KeyService{
 
     @Override
-    //Takes a String key -> List called chords.
     public List<String> getVandVIIChordsFromKey(String key) {
         List<String> chords = new ArrayList<>();
         key = key.toUpperCase();
@@ -37,9 +36,10 @@ public class KeyServiceImpl implements KeyService{
                 break;
 
             case "A":
-
-                chords.add("G#o");
                 chords.add("A7");
+                chords.add("G#o");
+                chords.add("E7");
+
                 break;
 
             case "E":
@@ -47,56 +47,6 @@ public class KeyServiceImpl implements KeyService{
                 chords.add("B7");
                 chords.add("D#o");
                 break;
-
-//            case "B":
-//                chords.add("B");
-//                chords.add("C#m");
-//                chords.add("D#m");
-//                chords.add("E");
-//                chords.add("F#7");
-//                chords.add("G#m");
-//                chords.add("A#o");
-//                break;
-//
-//            case "F#":
-//                chords.add("F#");
-//                chords.add("G#m");
-//                chords.add("A#m");
-//                chords.add("B");
-//                chords.add("C#7");
-//                chords.add("D#m");
-//                chords.add("Fo");
-//                break;
-
-//            case "Db":
-//                chords.add("E");
-//                chords.add("F#m");
-//                chords.add("G#m");
-//                chords.add("A");
-//                chords.add("B7");
-//                chords.add("C#m");
-//                chords.add("D#o");
-//                break;
-//
-//            case "Ab":
-//                chords.add("E");
-//                chords.add("F#m");
-//                chords.add("G#m");
-//                chords.add("A");
-//                chords.add("B7");
-//                chords.add("C#m");
-//                chords.add("D#o");
-//                break;
-//
-//            case "Eb":
-//                chords.add("Eb");
-//                chords.add("Fm");
-//                chords.add("Gm");
-//                chords.add("Ab");
-//                chords.add("Bb7");
-//                chords.add("Cm");
-//                chords.add("Eo");
-//                break;
 
             case "Bb":
                 chords.add("Bb7");

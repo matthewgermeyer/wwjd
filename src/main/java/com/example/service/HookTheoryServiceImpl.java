@@ -1,6 +1,8 @@
 package com.example.service;
 
+import com.example.common.Util;
 import com.example.domain.HookTheorySong;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -17,28 +19,14 @@ import java.util.List;
 @Service
 public class HookTheoryServiceImpl implements HookTheoryService{
 
+    @Autowired
+    Util util;
+
     @Override
     public List<HookTheorySong> getHookTheorySongs(String genre) {
 
         String targetURL ="https://api.hooktheory.com/v1/trends/songs?cp=";
-        String genreURL;
-
-        switch (genre){
-            case "blues":
-                genreURL ="1,4,5";
-                break;
-            case "popRock":
-                genreURL ="1,5,6,4";
-                break;
-            case "soulful":
-                genreURL ="1,6,4,5";
-                break;
-            case "classicRock":
-                genreURL ="1,4,5,4";
-                break;
-            default:
-                genreURL = "1";
-        }
+        String genreURL = util.getGenreUrl(genre);
         String finishedURL = targetURL + genreURL;
 
         RestTemplate restTemplate = new RestTemplate();

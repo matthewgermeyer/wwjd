@@ -17,6 +17,7 @@ import java.util.List;
 
 @Repository
 public class SongDaoImpl implements SongDao {
+
     @Autowired
     JdbcTemplate jdbcTemplate;
 
@@ -24,6 +25,7 @@ public class SongDaoImpl implements SongDao {
     public void add(Song song) {
         StringBuilder sb = new StringBuilder();
         boolean addSeparator = false;
+
         for (String chord : song.getChords()) {
             if (addSeparator) {
                 sb.append("|");
