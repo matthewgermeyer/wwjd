@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -109,12 +111,13 @@ public class JimiController {
     }
 
     @PostMapping("/manageSongs/delete")
-    public String deleteSong(@RequestParam(value = "songId", required = true) int songId, Model model) {
+    public String deleteSong(@RequestParam(value = "songId", required = true) int songId, Model model, HttpServletResponse response) throws IOException {
 
         songService.delete(songId);
         model.addAttribute("songs", songService.findAllByUsername());
 
         return "songManagement";
+
     }
 
     @PostMapping("/song")
