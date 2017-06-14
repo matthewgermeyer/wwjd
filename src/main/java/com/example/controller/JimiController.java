@@ -112,14 +112,6 @@ public class JimiController {
 
         }
 
-
-
-//        System.out.println("details " + authentication.getDetails());
-//        System.out.println("authorties " + authentication.getAuthorities());
-//        System.out.println("credentials " + authentication.getCredentials());
-//        System.out.println("principal " + authentication.getPrincipal());
-//        System.out.println("is authenticated " + authentication.isAuthenticated());
-
         model.addAttribute("songs", songService.findAllByUsername());
         return "songManagement";
     }
