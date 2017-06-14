@@ -116,8 +116,6 @@ public class JimiController {
         return "songManagement";
     }
 
-
-
     @PostMapping("/manageSongs/delete")
     public String deleteSong(@RequestParam(value = "songId", required = true) int songId, Model model, HttpServletResponse response) throws IOException {
 
