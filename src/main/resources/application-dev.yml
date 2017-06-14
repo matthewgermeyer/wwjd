@@ -25,8 +25,8 @@ facebook:
 
 github:
   client:
-    clientId: f16e9e7f448bc4832bdf
-    clientSecret: da267255b1a03bccf52c91c6d667419e3624ca0e
+    clientId: ddcb874117f2d49d3fbc
+    clientSecret: f6f045b505f865c3e1eca82006f6d3449508bb94
     accessTokenUri: https://github.com/login/oauth/access_token
     userAuthorizationUri: https://github.com/login/oauth/authorize
     clientAuthenticationScheme: form
@@ -35,8 +35,8 @@ github:
 
 google:
   client:
-    clientId: 1047220931894-3meo845jqf33frv7nsjeridrste3tp6h.apps.googleusercontent.com
-    clientSecret:  NeHhb5lL9EfMaIuFupnl1DJw
+    clientId: 514653577057-id5gpd8f9jle0phn4d1alg7koosfc27g.apps.googleusercontent.com
+    clientSecret:  XhTxLi1PhLikrKfun2LsPChW
     accessTokenUri: https://www.googleapis.com/oauth2/v4/token
     userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
     clientAuthenticationScheme: form
