@@ -2,11 +2,10 @@ package com.example.controller;
 
 import com.example.common.Util;
 import com.example.domain.Song;
-import com.example.service.ChordService;
-import com.example.service.HookTheoryService;
-import com.example.service.KeyService;
-import com.example.service.SongService;
+import com.example.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +24,8 @@ import java.util.TreeSet;
 public class JimiController {
 
     @Autowired
+    UserService userService;
+    @Autowired
     KeyService keyService;
     @Autowired
     ChordService chordService;
@@ -34,6 +35,8 @@ public class JimiController {
     Util util;
     @Autowired
     HookTheoryService hookTheoryService;
+    @Autowired
+    AuthoritiesService authoritiesService;
 
     @GetMapping("/project")
     public String project() {
@@ -101,9 +104,27 @@ public class JimiController {
 
     @GetMapping("/manageSongs")
     public String seeAllSongsForUser(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (! userService.isFound(authentication.getName())){
+            userService.add(authentication.getName());
+            authoritiesService.add(authentication.getName());
+
+        }
+
+
+
+//        System.out.println("details " + authentication.getDetails());
+//        System.out.println("authorties " + authentication.getAuthorities());
+//        System.out.println("credentials " + authentication.getCredentials());
+//        System.out.println("principal " + authentication.getPrincipal());
+//        System.out.println("is authenticated " + authentication.isAuthenticated());
+
         model.addAttribute("songs", songService.findAllByUsername());
         return "songManagement";
     }
+
+
 
     @PostMapping("/manageSongs/delete")
     public String deleteSong(@RequestParam(value = "songId", required = true) int songId, Model model, HttpServletResponse response) throws IOException {

@@ -21,4 +21,15 @@ public class UserServiceImpl implements UserService{
         userDao.add(user);
 
     }
+
+    @Override
+    public boolean isFound(String username){
+        return userDao.isFound(username);
+    }
+
+    @Override
+    public void add(String username){
+        userDao.add(username);
+    }
+
 }

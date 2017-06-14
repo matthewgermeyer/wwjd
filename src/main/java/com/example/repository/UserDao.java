@@ -7,4 +7,6 @@ import com.example.domain.User;
  */
 public interface UserDao {
     void add(User user);
+    boolean isFound(String username);
+    void add(String username);
 }

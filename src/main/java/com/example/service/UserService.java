@@ -7,4 +7,6 @@ import com.example.domain.User;
  */
 public interface UserService {
     void add(User user);
+    void add(String username);
+    boolean isFound(String username);
 }
