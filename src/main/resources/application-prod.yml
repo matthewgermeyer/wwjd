@@ -13,8 +13,8 @@ logging:
 
 facebook:
   client:
-    clientId: 1400465170037577
-    clientSecret: 0a96a392aef0bdb88ab345b1a21caa67
+    clientId: 137704480134330
+    clientSecret: 7d0b48f9a80eefaff3b4fd6da2b1cd00
     accessTokenUri: https://graph.facebook.com/oauth/access_token
     userAuthorizationUri: https://www.facebook.com/dialog/oauth
     tokenName: oauth_token
