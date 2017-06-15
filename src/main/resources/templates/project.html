@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en">
 <head>
     <meta charset="utf-8"/>
     <title>WWJP? Assisted Songwriting and Practice Tools! </title>
@@ -17,12 +17,13 @@
     <script src="/js/wwjd.js"></script>
 </head>
 <body>
- <!--Navigation -->
+<!--Navigation -->
 <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
     <div class="container topnav">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -34,7 +35,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <b class = "caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                            class="glyphicon glyphicon-user"></span> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="/manageSongs">Manage Songs</a></li>
                         <li><a href="/logout">Logout</a></li>
@@ -49,46 +51,41 @@
 
 <br/>
 <br/>
+<br/>
+
 
 <div class="container">
-<div class="row">
-    <div class="col-sm-3">
-        <br/>
-        <br/>
-        <br/>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 text-center">
+            <h1 class="text-center"> Howdy! Let's build a song!</h1>
+            <h3 class="text-center"> We need a Key to Start!</h3>
+        </div>
+        <div class="col-md-2"></div>
     </div>
-    <div class="col-sm-8 col-md-6 col-lg-6 col-xs-12"><h1> Howdy!  Let's build a song!</h1>
-        <h3>  We need a Key to Start!</h3> </div>
-    <div class="col-sm-3"></div>
 </div>
 
-<br/>
-<br/>
 
-<div class="row">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4">
-        <form action="/project/key" method="post">
-            <select name="key">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4"></div>
+        <div class="col-sm-4 col-md-4 col-lg-4 center-block text-center">
+            <form action="/project/key" method="post">
+                <select name="key">
+                    <option>Select a Key!</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                    <option value="A">A</option>
 
-                <option>Select a Key!</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-                <option value="E">E</option>
-                <option value="F">F</option>
-                <option value="G">G</option>
-                <option value="A">A</option>
-
-            </select>
-            <input class="btn btn-primary btn-md" role="button" type="submit" value="Get Started!"/>
-        </form>
-
+                </select>
+                <input class="btn btn-primary btn-md" role="button" type="submit" value="Get Started!"/>
+            </form>
+        </div>
     </div>
-    <div class="col-sm-4"></div>
 </div>
-</div>
-
-
 
 <br/>
 <br/>
@@ -103,13 +100,17 @@
             <div class="col-lg-6">
                 <ul class="list-inline banner-social-buttons">
                     <li>
-                        <a href="https://twitter.com/MattyTrane" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                        <a href="https://twitter.com/MattyTrane" class="btn btn-default btn-lg"><i
+                                class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
                     </li>
                     <li>
-                        <a href="https://github.com/matto483" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                        <a href="https://github.com/matto483" class="btn btn-default btn-lg"><i
+                                class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
                     </li>
                     <li>
-                        <a href="https://www.linkedin.com/in/matt-germeyer-988b8383/" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
+                        <a href="https://www.linkedin.com/in/matt-germeyer-988b8383/"
+                           class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span
+                                class="network-name">Linkedin</span></a>
                     </li>
                 </ul>
             </div>
@@ -146,10 +147,10 @@
     </div>
 </footer>
 
- <!-- jQuery -->
- <script src="js/jquery.js"></script>
- <!-- Bootstrap Core JavaScript -->
- <script src="js/bootstrap.min.js"></script>
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>

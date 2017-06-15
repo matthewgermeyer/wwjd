@@ -109,19 +109,27 @@
     </div>
 </div>
 <br/>
-<div class="container" th:if="${genre} != null">
-    <div class="col-lg-8 well">
-        <h4 class="text-center"><a href="#col1Content" data-toggle="collapse"> Info </a></h4>
 
-        <div id="#col1Content" class="collapse in">
-            The songs below contain the chord progression you have chosen! Look through them. Notice that they represent
-            a broad diversity of musical styles. Jeff Buckley, Elton John, Fallout Boy, Justin Bieber and Bare Naked
-            Ladies alike rely on standard progressions like these as the backbone for LOTS of tunes.<br/><br/>
+<!--Info well-->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-2 text-center center-block" th:if="${genre} != null">
+            <button class="btn btn-info" data-toggle="collapse" data-target="#demo">Info <span class="caret"></span>
+            </button>
         </div>
+
+        <div class="col-lg-6"></div>
+    </div>
+
+    <div id="demo" class="collapse well">
+        The songs below contain the chord progression you have chosen! Look through them. Notice that they represent
+        a broad diversity of musical styles. Jeff Buckley, Elton John, Fallout Boy, Justin Bieber and Bare Naked
+        Ladies alike rely on standard progressions like these as the backbone for LOTS of tunes.<br/><br/>
     </div>
 </div>
 
-
+<!--HookSongs table-->
 <div class="container">
     <div th:if="${not #lists.isEmpty(hookSongs)}">
         <h3 class="text-center">Songs containing this progression:</h3>
@@ -172,7 +180,6 @@
     </div>
     <!-- /.container -->
 </div>
-<!-- /.banner -->
 <!-- Footer -->
 <footer>
     <div class="container">
@@ -201,6 +208,8 @@
         </div>
     </div>
 </footer>
+
+
 <!-- jQuery -->
 <script src="js/jquery.js"></script>
 <!-- Bootstrap Core JavaScript -->
