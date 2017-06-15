@@ -14,6 +14,7 @@ public interface SongService {
     List<Song> findAllByUsername(String username);
     List<Song> findAllByUsername();
     void delete(int id);
+    void update(int id, String title);
 
 
 }

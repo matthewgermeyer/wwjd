@@ -67,4 +67,9 @@ public class SongServiceImpl implements  SongService{
         songDao.delete(id);
     }
 
+    @Transactional
+    public void update(int id, String title){
+        songDao.update(id, title);
+    }
+
 }

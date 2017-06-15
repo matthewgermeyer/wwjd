@@ -11,5 +11,6 @@ public interface SongDao {
     void add(Song song);
     List<Song> findAllByUsername(String username);
     void delete(int id);
+    void update(int id, String title);
 
 }

@@ -37,7 +37,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <b class = "caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/mySongs">Manage Songs</a></li>
+                        <li><a href="/manageSongs">Manage Songs</a></li>
                         <li><a href="/logout">Logout</a></li>
                     </ul>
                 </li>
@@ -50,49 +50,25 @@
 </nav>
 <br/>
 <br/>
-<div class = "row">
-    <br/>
-    <br/>
-    <br/>
-</div>
 
-<div class="row">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4"> <h2> Give it a Title! </h2></div>
-    <div class="col-sm-4"></div>
-</div>
-
-<div class = "row">
-    <br/>
-    <br/>
-    <br/>
-</div>
 
 <!--Show the SongChords-->
 <h2 class = "text-center"> <span th:each="songChord : ${songChords}"
                                  th:text=" ${songChord} + '  |  ' "></span>
 </h2>
-<div class="row">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4">
-
+<div class="container">
+    <h3>Give it a title! </h3><br/>
+    <div class="input group input-group-lg">
         <form action="/save" method="post">
-        <h3>Give it a title! </h3><br/>
-        <input type="hidden" name="key" th:value="${key}"/>
-        <input type="hidden" name="genre" th:value="${genre}"/>
-        <input type="text" name="title" placeholder="your title"/>
-            <br/>
-        <input class= "btn btn-primary btn-md" type="submit" value="
+            <input type="hidden" name="key" th:value="${key}"/>
+            <input type="hidden" name="genre" th:value="${genre}"/>
+            <input type="text" class= "form-control" name="title" placeholder="your title"/>
+            <input class= "btn btn-primary btn-md" type="submit" value="
         Save it!!"/>
-    </form></div>
-    <div class="col-sm-4"></div>
-</div>
+        </form>
+    </div>
 
 
-<div class = "row">
-    <br/>
-    <br/>
-    <br/>
 </div>
 
 <!--Get in Touch Banner-->

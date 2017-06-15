@@ -56,8 +56,14 @@ public class SongDaoImpl implements SongDao {
     public void delete(int id){
         String sql = "delete from song where id = ?";
         jdbcTemplate.update(sql, id);
+    }
+    @Override
+    public void update(int id, String title){
+        String sql = "update song SET title = ? WHERE id = ?";
+        jdbcTemplate.update(sql, title, id);
 
     }
+
 private static class SongMapper implements RowMapper<Song> {
 
     @Override

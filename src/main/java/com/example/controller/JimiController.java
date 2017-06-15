@@ -2,13 +2,7 @@ package com.example.controller;
 
 import com.example.common.Util;
 import com.example.domain.Song;
-
-import com.example.service.ChordService;
-import com.example.service.HookTheoryService;
-import com.example.service.SongService;
-
 import com.example.service.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,8 +48,8 @@ public class JimiController {
     @PostMapping("/project/key")
     public String songInKey(@RequestParam(value = "key",
             required = true) String key, Model model) {
-        List<String> chords = chordService.getBasicChords(key);
-        model.addAttribute("chords", chords);
+//        List<String> chords = chordService.getBasicChords(key);
+//        model.addAttribute("chords", chords);
         model.addAttribute("key", key);
         return "song";
     }
@@ -69,7 +62,6 @@ public class JimiController {
 
         //adds genretext to playbutton in model
         util.genreOnPlayButton(genre, model);
-
         model.addAttribute("genre", genre);
         model.addAttribute("key", key);
         model.addAttribute("songChords", songChords);
@@ -121,10 +113,17 @@ public class JimiController {
 
     @PostMapping("/mySongs/delete")
     public String deleteSong(@RequestParam(value = "songId", required = true) int songId, Model model, HttpServletResponse response) throws IOException {
-
         songService.delete(songId);
         model.addAttribute("songs", songService.findAllByUsername());
+        return "songManagement";
 
+    }
+
+    @PostMapping("/mySongs/update")
+    public String updateSong(@RequestParam(value = "songId", required = true) int songId,
+                             @RequestParam(value="songTitle", required = true) String songTitle, Model model, HttpServletResponse response) throws IOException {
+        songService.update(songId, songTitle);
+        model.addAttribute("songs", songService.findAllByUsername());
         return "songManagement";
 
     }
@@ -134,14 +133,11 @@ public class JimiController {
             @RequestParam(value = "key", required = true) String key,
             @RequestParam(value = "chord", required = true) String chord,
             @RequestParam(value = "songChords", required = false) List<String> songChords, Model model) {
-
         if (songChords == null) {
             songChords = new ArrayList<>();
         }
         songChords.add(chord);
-
         List<String> suggestedChords = chordService.getBasicChords(key);
-
         //Convert to a set to remove any duplications
         Set<String> suggestedChordSet = new TreeSet<>(suggestedChords);
 
