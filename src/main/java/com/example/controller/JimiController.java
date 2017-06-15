@@ -48,8 +48,6 @@ public class JimiController {
     @PostMapping("/project/key")
     public String songInKey(@RequestParam(value = "key",
             required = true) String key, Model model) {
-//        List<String> chords = chordService.getBasicChords(key);
-//        model.addAttribute("chords", chords);
         model.addAttribute("key", key);
         return "song";
     }
