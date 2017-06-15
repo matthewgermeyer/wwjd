@@ -56,11 +56,19 @@ public class SongDaoImpl implements SongDao {
     public void delete(int id){
         String sql = "delete from song where id = ?";
         jdbcTemplate.update(sql, id);
+
+        System.out.println("==============");
+        System.out.println("deleting song -> " + id);
+
     }
     @Override
     public void update(int id, String title){
         String sql = "update song SET title = ? WHERE id = ?";
         jdbcTemplate.update(sql, title, id);
+
+        System.out.println("==============");
+        System.out.println("updating song -> " + id);
+        System.out.println("new title     -> " + title);
 
     }
 
