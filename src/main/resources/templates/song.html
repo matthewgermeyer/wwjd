@@ -29,7 +29,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand topnav" href="/project">WWJP?</a>
+            <a class="navbar-brand topnav" href="project/key">WWJP?</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -60,20 +60,67 @@
     <div class="col-sm-4"></div>
 </div>
 
-<br/>
-<br/>
+<div class="container" th:if = "${key} != null">
+    <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4"></div>
+        <div class="col-sm-4 col-md-4 col-lg-4 center-block text-center">
+            <form action="/genre" method="get">
+                <select name="key">
+                    <option>New Key? </option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                    <option value="A">A</option>
 
-<!--&lt;!&ndash;Song Chords-->
+                </select>
+                <input class="btn btn-warning btn-sm" role="button" type="submit" value="Change!"/>
+                <input type="hidden" name="genre" th:value="${genre}"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Key Select-->
+<div class="container" th:if = "${key} == null">
+    <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4"></div>
+        <div class="col-sm-4 col-md-4 col-lg-4 center-block text-center">
+            <form action="/project/key" method="post">
+                <select name="key">
+                    <option>Select a Key!</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                    <option value="A">A</option>
+
+                </select>
+                <input class="btn btn-primary btn-md" role="button" type="submit" value="Get Started!"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--Song Chords-->
 <div class="container">
-    <h2 class="text-center"> <span th:each="songChord : ${songChords}"
-                                   th:text=" ${songChord} + '   |  ' "></span></h2>
+    <h1 class="text-center"> <span th:each="songChord : ${songChords}"
+                                   th:text=" ${songChord} + '   |  ' "></span>
+
+    </h1>
+
+</div>
+
 
     <br/>
     <div class="container">
         <div class="row">
             <!--Play {genre} button-->
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
+            <div class="col-sm-4 col-md-4 col-lg-4"></div>
+            <div class="col-sm-4 col-md-4 col-lg-4 center-block text-center">
 
                 <div class="btn-group btn-group-md">
 
@@ -102,19 +149,21 @@
     </div>
 
 
-    <!--Save button-->
+    <!--Old Save button-->
     <!--<a th:href="@{/newSong(key=${key},genre=${genre})}" th:if="${genre} != null">-->
     <!--<button class="btn btn-danger btn-lg">Save!!!</button>-->
     <!--</a>-->
 
-</div>
+
 
 <br/>
 <br/>
 <br/>
+
+
 
 <!--Generate song Buttons-->
-<div class="container">
+<div class="container" th:if="${key} != null ">
     <div class="col-md-3">
         <a href="#" th:href="@{/genre(key=${key},genre=blues)}">
             <button class="btn btn-success btn-lg" role="button">Blues!</button>

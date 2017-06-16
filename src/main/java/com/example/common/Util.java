@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +22,15 @@ public class Util {
         List<String> songChords;
         switch (genre){
             case "blues":
-                songChords = chordService.generateBlues(key);
+                List<String> songChordsPre;
+                songChordsPre = chordService.generateBlues(key);
+
+                List<String> songChordz = new ArrayList<>();
+                for (String chord : songChordsPre){
+                    chord = chord + "7";
+                    songChordz.add(chord);
+                }
+                songChords = songChordz;
                 break;
             case "popRock":
                 songChords = chordService.generatePopRock(key);

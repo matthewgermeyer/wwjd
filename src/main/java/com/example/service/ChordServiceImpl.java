@@ -30,8 +30,8 @@ public class ChordServiceImpl implements ChordService {
     public List<String> generatePopRock(String key) {
         ChordProgression cp = new ChordProgression("I V vi IV I V vi IV");
         cp.setKey(key);
-        return chordsFromCP(cp);
 
+        return chordsFromCP(cp);
     }
 
     public List<String> generateSoulful(String key) {

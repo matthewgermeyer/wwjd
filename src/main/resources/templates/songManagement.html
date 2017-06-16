@@ -27,7 +27,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand topnav" href="/project">WWJP?</a>
+            <a class="navbar-brand topnav" href="project/key">WWJP?</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -60,6 +60,13 @@
 <br/>
 <br/>
 <br/>
+<div class="container">
+    <div class="text-center">
+        <div class="col-lg-4">
+            <a href="/project/key" class="btn btn-info btn-block" role="button" aria-disabled="true">Create a Tune!</a><br/>
+        </div>
+    </div>
+</div>
 
 <div class="container ">
 <div th:if="${not #lists.isEmpty(songs)}">
@@ -107,13 +114,7 @@
 </div>
 </div>
 
-<div class="container">
-    <div class="text-center">
-        <div class="col-lg-4">
-        <a href="/project" class="btn btn-info btn-block" role="button" aria-disabled="true">Create a Tune!</a><br/>
-        </div>
-    </div>
-</div>
+
 
 
 

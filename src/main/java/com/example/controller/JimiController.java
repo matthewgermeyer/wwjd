@@ -8,10 +8,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,8 +43,15 @@ public class JimiController {
         return "login";
     }
 
+    @GetMapping("/project/key")
+    public String noKey(@RequestParam(value = "key",
+            required = false) String key, Model model) {
+        model.addAttribute("key", key);
+        return "song";
+    }
+
     @PostMapping("/project/key")
-    public String songInKey(@RequestParam(value = "key",
+    public String keyChosen(@RequestParam(value = "key",
             required = true) String key, Model model) {
         model.addAttribute("key", key);
         return "song";
@@ -57,6 +62,7 @@ public class JimiController {
             @RequestParam(value = "key", required = true) String key,@RequestParam(value = "genre", required = true) String genre, Model model) {
 
         List<String> songChords = util.songChordsFromGenre(genre, key);
+
 
         //adds genretext to playbutton in model
         util.genreOnPlayButton(genre, model);
