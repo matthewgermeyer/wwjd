@@ -29,7 +29,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand topnav" href="project/key">WWJP?</a>
+            <a class="navbar-brand topnav" href="/project/key">WWJP?</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -49,14 +49,27 @@
     <!-- /.container -->
 </nav>
 
-<br/>
-<br/>
-<br/>
+<div class="container">
+    <br/>
+    <br/>
+    <br/>
+</div>
+
+
+<div class="container" th:if="${key} == null ">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 text-center">
+            <h3 class="text-center"> We need a Key to Start!</h3>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
 
 <!--Generate tune message-->
 <div class="row">
     <div class="col-sm-4"></div>
-    <div class="col-sm-4"><h2 th:if="${key} != null ">Generate a tune in <span th:text="${key} + '!'"></span></h2></div>
+    <div class="col-sm-4"><h3 th:if="${key} != null ">Choose a genre below to generate a tune in <span th:text="${key} + '!'"></span></h3></div>
     <div class="col-sm-4"></div>
 </div>
 
@@ -191,30 +204,29 @@
 
 <br/>
 
-<!--Info well-->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-2 text-center center-block" th:if="${genre} != null">
-            <button class="btn btn-info" data-toggle="collapse" data-target="#demo">Info <span class="caret"></span>
-            </button>
-        </div>
-
-        <div class="col-lg-6"></div>
-    </div>
-
-    <div id="demo" class="collapse well">
-        The songs below contain the chord progression you have chosen! Look through them. Notice that they represent
-        a broad diversity of musical styles. Jeff Buckley, Elton John, Fallout Boy, Justin Bieber and Bare Naked
-        Ladies alike rely on standard progressions like these as the backbone for LOTS of tunes.<br/><br/>
-    </div>
-</div>
 
 <!--HookSongs table-->
 <div class="container">
     <div th:if="${not #lists.isEmpty(hookSongs)}">
-        <h3 class="text-center">Songs containing this progression:</h3>
+        <h3 class="text-center">Songs like this:</h3>
+        <!--Info well-->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-2 text-center center-block" th:if="${genre} != null">
+                    <button class="btn btn-info" data-toggle="collapse" data-target="#demo">Info <span class="caret"></span>
+                    </button>
+                </div>
 
+                <div class="col-lg-6"></div>
+            </div>
+
+            <div id="demo" class="collapse well">
+                The songs below contain the chord progression you have chosen! Look through them. Notice that they represent
+                a broad diversity of musical styles. Jeff Buckley, Elton John, Fallout Boy, Justin Bieber and Bare Naked
+                Ladies alike rely on standard progressions like these as the backbone for LOTS of tunes.<br/><br/>
+            </div>
+        </div>
         <table class="table table-striped table-bordered table-hover">
             <tr>
                 <th class="text-center"> Artist</th>

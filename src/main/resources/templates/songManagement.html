@@ -27,7 +27,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand topnav" href="project/key">WWJP?</a>
+            <a class="navbar-brand topnav" href="/project/key">WWJP?</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -92,22 +92,28 @@
             <td class="text-center" th:text="${song.genre}"></td>
             <td>
                 <!--Delete tune!-->
+                <button class="btn btn-danger btn-sm" type="submit" form="delete" value="Submit">
+                    <span th:text="${song.id}"></span>
+                    <span class="glyphicon glyphicon-trash"></span>
+                    Delete</button>
+
                 <form th:action="@{/mySongs/delete}" method="post" id="delete">
                     <input type="hidden" th:value="${song.id}" name="songId"/>
                 </form>
-                <button class="btn btn-danger btn-sm" type="submit" form="delete" value="Submit">
-                    <span class="glyphicon glyphicon-trash"></span>
-                    Delete</button>
+
 
                 <!--Update tune!-->
                 <button class="btn btn-primary btn-sm" type="submit" form="update" value="Submit">
                     <span class="glyphicon glyphicon-pencil"></span>
                     Rename</button>
+
                 <form th:action="@{/mySongs/update}" method="post" id="update">
                     <input type="hidden" th:value="${song.id}" name="songId"/>
                     <input type="text" placeholder="Rename?" name="songTitle"/>
                 </form>
+
             </td>
+
         </tr>
         </tbody>
     </table>

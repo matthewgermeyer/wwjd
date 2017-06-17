@@ -13,6 +13,6 @@ import java.io.IOException;
 public class AuthenticationSuccess implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-        httpServletResponse.sendRedirect("/project");
+        httpServletResponse.sendRedirect("/project/key");
     }
 }
