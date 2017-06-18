@@ -91,18 +91,17 @@
             <td class="text-center" th:text="${song.key}"></td>
             <td class="text-center" th:text="${song.genre}"></td>
             <td>
-                <!--Delete tune!-->
-                <button class="btn btn-danger btn-sm" type="submit" form="delete" value="Submit">
-                    <span th:text="${song.id}"></span>
-                    <span class="glyphicon glyphicon-trash"></span>
-                    Delete</button>
-
-                <form th:action="@{/mySongs/delete}" method="post" id="delete">
+                <!--Delete Button-->
+                <form th:action="@{/mySongs/delete}" method="post">
                     <input type="hidden" th:value="${song.id}" name="songId"/>
+                    <button class="btn btn-danger btn-sm" type="submit" value="Submit">
+                        <span class="glyphicon glyphicon-trash"></span>
+                        Delete</button>
                 </form>
+            </td>
 
-
-                <!--Update tune!-->
+            <td>
+                <!--Update Button-->
                 <button class="btn btn-primary btn-sm" type="submit" form="update" value="Submit">
                     <span class="glyphicon glyphicon-pencil"></span>
                     Rename</button>
@@ -111,9 +110,24 @@
                     <input type="hidden" th:value="${song.id}" name="songId"/>
                     <input type="text" placeholder="Rename?" name="songTitle"/>
                 </form>
-
             </td>
 
+            <!--<td>-->
+                <!--&lt;!&ndash;Update testing...&ndash;&gt;-->
+                <!--<button class="btn btn-info" data-toggle="collapse" data-target="#rename"><span class="glyphicon glyphicon-pencil"></span> Edit Title <span class="caret"></span>-->
+                <!--</button>-->
+
+                <!--<div class="collapse" id="rename">-->
+
+                    <!--<form th:action="@{/mySongs/update}" method="post">-->
+                        <!--<input type="hidden" th:value="${song.id}" name="songId"/>-->
+                        <!--<input type="text" placeholder="new Title" name="songTitle"/>-->
+                        <!--<button class="btn btn-primary btn-sm" type="submit" form="update" value="Submit">Rename</button>-->
+
+                    <!--</form>-->
+                <!--</div>-->
+
+            <!--</td>-->
         </tr>
         </tbody>
     </table>
