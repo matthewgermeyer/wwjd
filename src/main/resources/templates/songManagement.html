@@ -16,6 +16,7 @@
     <script src="/js/wwjd.js"></script>
 </head>
 <body>
+
 <!--Navigation -->
 <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
     <div class="container topnav">
@@ -68,6 +69,7 @@
     </div>
 </div>
 
+<!--Your Songs-->
 <div class="container ">
 <div th:if="${not #lists.isEmpty(songs)}">
 
@@ -117,13 +119,7 @@
     </table>
 </div>
 </div>
-
-
-
-
-
 <br/>
-
 
 
 
@@ -154,7 +150,7 @@
     </div>
     <!-- /.container -->
 </div>
-<!-- /.banner -->
+
 <!-- Footer -->
 <footer>
     <div class="container">
