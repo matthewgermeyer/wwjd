@@ -10,7 +10,8 @@
     <link href="/css/landing-page.css" rel="stylesheet"/>
     <!-- Custom Fonts -->
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+          type="text/css"/>
 
     <script src="/js/jquery.js"></script>
     <script src="/js/wwjd.js"></script>
@@ -21,7 +22,8 @@
     <div class="container topnav">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -33,7 +35,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <b class = "caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                            class="glyphicon glyphicon-user"></span> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="/manageSongs">Manage Songs</a></li>
                         <li><a href="/logout">Logout</a></li>
@@ -71,18 +74,19 @@
 <!--Generate tune message-->
 <div class="row">
     <div class="col-sm-4"></div>
-    <div class="col-sm-4"><h3 th:if="${key} != null ">Choose a progression below!  Key is <span th:text="${key} + '!'"></span></h3></div>
+    <div class="col-sm-4"><h3 th:if="${key} != null ">Choose a progression below! Key is <span
+            th:text="${key} + '!'"></span></h3></div>
     <div class="col-sm-4"></div>
 </div>
 
 <!--Key Change-->
-<div class="container" th:if = "${key} != null">
+<div class="container" th:if="${key} != null">
     <div class="row">
         <div class="col-sm-4 col-md-4 col-lg-4"></div>
         <div class="col-sm-4 col-md-4 col-lg-4 center-block text-center">
             <form action="/genre" method="get">
                 <select name="key">
-                    <option>New Key? </option>
+                    <option>New Key?</option>
                     <option value="C">C</option>
                     <option value="D">D</option>
                     <option value="E">E</option>
@@ -99,7 +103,7 @@
 </div>
 
 <!--Key Select-->
-<div class="container" th:if = "${key} == null">
+<div class="container" th:if="${key} == null">
     <div class="row">
         <div class="col-sm-4 col-md-4 col-lg-4"></div>
         <div class="col-sm-4 col-md-4 col-lg-4 center-block text-center">
@@ -113,7 +117,7 @@
                     <option value="G">G</option>
                     <option value="A">A</option>
                 </select>
-                <!--<input class="btn btn-primary btn-md" role="button" type="submit" value="Get Started!"/>-->
+
             </form>
         </div>
     </div>
@@ -130,53 +134,44 @@
 </div>
 
 
-    <br/>
-    <div class="container">
-        <div class="row">
-            <!--Play {genre} button-->
-            <div class="col-sm-4 col-md-4 col-lg-4"></div>
-            <div class="col-sm-4 col-md-4 col-lg-4 center-block text-center">
+<br/>
+<div class="container">
+    <div class="row">
+        <!--Play {genre} button-->
+        <div class="col-sm-4 col-md-4 col-lg-4"></div>
+        <div class="col-sm-4 col-md-4 col-lg-4 center-block text-center">
 
-                <div class="btn-group btn-group-md">
+            <div class="btn-group btn-group-md">
 
-                    <button class="btn btn-primary" th:attr="key= ${key}" id="playId" th:if="${genre} != null"
-                            th:text="'Play ' + ${genretext} "></button>
+                <button class="btn btn-primary" th:attr="key= ${key}" id="playId" th:if="${genre} != null"
+                        th:text="'Play ' + ${genretext} "></button>
 
-                    <!--Save button pulldown-->
-                    <button class="btn btn-danger" data-toggle="collapse" data-target="#save"
-                            th:if="${genre} != null"> Save <span class="caret"> </span>
-                    </button>
-                </div>
+                <!--Save button pulldown-->
+                <button class="btn btn-danger" data-toggle="collapse" data-target="#save"
+                        th:if="${genre} != null"> Save <span class="caret"> </span>
+                </button>
+            </div>
 
-                <!--Title pulldown-->
-                <div id="save" class="collapse">
-                    <p> Give it a Title! </p>
-                    <div class="input group input-group-sm">
-                        <form action="/save" method="post">
-                            <input type="hidden" name="key" th:value="${key}"/>
-                            <input type="hidden" name="genre" th:value="${genre}"/>
-                            <input type="text" class="form-control" name="title" placeholder="your title"/>
-                            <input class="btn btn-primary btn-md" type="submit" value="Save it!!"/>
-                        </form>
-                    </div>
+            <!--Title pulldown-->
+            <div id="save" class="collapse">
+                <p> Give it a Title! </p>
+                <div class="input group input-group-sm">
+                    <form action="/save" method="post">
+                        <input type="hidden" name="key" th:value="${key}"/>
+                        <input type="hidden" name="genre" th:value="${genre}"/>
+                        <input type="text" class="form-control" name="title" placeholder="your title"/>
+                        <input class="btn btn-primary btn-md" type="submit" value="Save it!!"/>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-
-
-    <!--Old Save button-->
-    <!--<a th:href="@{/newSong(key=${key},genre=${genre})}" th:if="${genre} != null">-->
-    <!--<button class="btn btn-danger btn-lg">Save!!!</button>-->
-    <!--</a>-->
-
+</div>
 
 
 <br/>
 <br/>
 <br/>
-
-
 
 <!--Generate song Buttons-->
 <div class="container" th:if="${key} != null ">
@@ -207,12 +202,24 @@
 
 <br/>
 
-
 <!--HookSongs table-->
 <div class="container">
     <div th:if="${not #lists.isEmpty(hookSongs)}">
         <h3 class="text-center">Songs like this:</h3>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <!--Info Button-->
+                <div class="col-md-4">
 
+                    <button class="btn btn-info btn-block" data-toggle="collapse" data-target="#demo"
+                            th:if="${genre} != null"> Info <span class="caret"> </span>
+                    </button>
+                </div>
+                <div class="col-md-4"></div>
+
+            </div>
+        </div>
 
         <!--Info well-->
         <div class="container">
@@ -220,13 +227,15 @@
                 <div class="col-lg-4"></div>
                 <div class="col-lg-2 text-center center-block" th:if="${genre} != null">
 
+
                 </div>
 
                 <div class="col-lg-6"></div>
             </div>
 
             <div id="demo" class="collapse well">
-                The songs below contain the chord progression you have chosen! Look through them. Notice that they represent
+                The songs below contain the chord progression you have chosen! Look through them. Notice that they
+                represent
                 a broad diversity of musical styles. Jeff Buckley, Elton John, Fallout Boy, Justin Bieber and Bare Naked
                 Ladies alike rely on standard progressions like these as the backbone for LOTS of tunes.<br/><br/>
             </div>
@@ -311,8 +320,6 @@
 <!--jQuery and Bootstrap-->
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
-
 
 
 </body>
