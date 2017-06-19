@@ -95,6 +95,11 @@ public class JimiController {
             @RequestParam(value = "title", required = true) String title,
             Model model) {
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if ("anonymousUser".equals(authentication.getName())){
+            return "/login";
+        }
+
         songService.add(title, key, genre);
         List<Song> songs = songService.findAllByUsername();
         model.addAttribute("songs", songs);
@@ -104,6 +109,9 @@ public class JimiController {
     @GetMapping("/manageSongs")
     public String seeAllSongsForUser(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if ("anonymousUser".equals(authentication.getName())){
+            return "/login";
+        }
 
         if (! userService.isFound(authentication.getName())){
             userService.add(authentication.getName());

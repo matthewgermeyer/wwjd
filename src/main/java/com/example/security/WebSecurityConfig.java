@@ -29,20 +29,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private DataSource dataSource;
     @Autowired
     OAuth2ClientContext oauth2ClientContext;
-    @Autowired
-    AuthenticationSuccess authenticationSuccess;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
         http
-                .csrf().disable()
-                .logout().logoutSuccessUrl("/").permitAll()
-                .and()
-                .antMatcher("/**").authorizeRequests()
-                .antMatchers("/", "/login**").permitAll()
-                .anyRequest().authenticated()
-                .and().addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
+          .csrf().disable()
+          .authorizeRequests()
+            .antMatchers("/manageSongs","/save").authenticated()
+            .anyRequest().permitAll()
+          .and()
+            .formLogin().loginPage("/login").permitAll()
+          .and()
+            .logout().logoutSuccessUrl("/").permitAll()
+          .and()
+            .addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
         // @formatter:on
     }
 
@@ -57,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         UserInfoTokenServices tokenServices = new UserInfoTokenServices(facebookResource().getUserInfoUri(), facebook().getClientId());
         tokenServices.setRestTemplate(facebookTemplate);
         facebookFilter.setTokenServices(tokenServices);
-        facebookFilter.setAuthenticationSuccessHandler(authenticationSuccess);
+
         filters.add(facebookFilter);
 
         // Github
@@ -67,7 +68,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         tokenServices = new UserInfoTokenServices(githubResource().getUserInfoUri(), github().getClientId());
         tokenServices.setRestTemplate(githubTemplate);
         githubFilter.setTokenServices(tokenServices);
-        githubFilter.setAuthenticationSuccessHandler(authenticationSuccess);
         filters.add(githubFilter);
 
         // Google
@@ -77,7 +77,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         tokenServices = new UserInfoTokenServices(googleResource().getUserInfoUri(), google().getClientId());
         tokenServices.setRestTemplate(googleTemplate);
         googleFilter.setTokenServices(tokenServices);
-        googleFilter.setAuthenticationSuccessHandler(authenticationSuccess);
         filters.add(googleFilter);
 
         filter.setFilters(filters);
