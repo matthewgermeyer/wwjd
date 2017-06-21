@@ -101,7 +101,7 @@
 <!--Choose a genre-->
 <div class="row">
     <div class="col-sm-4"></div>
-    <div class="col-sm-4"><h1 th:if="${key} != null ">Now choose a genre below! Key is <span
+    <div class="col-sm-4"><h1 th:if="${key} != null">Now choose a genre below! Key is <span
             th:text="${key} + '!'"></span></h1></div>
     <div class="col-sm-4"></div>
 </div>
@@ -172,6 +172,8 @@
                 <button class="btn btn-danger" data-toggle="collapse" data-target="#save"
                         th:if="${genre} != null"> Save <span class="caret"> </span>
                 </button>
+
+                <a href="https://www.spx.org/upload/Guitar/Basic_Guitar_Chords_000.pdf" class="btn btn-primary" th:if="${genre} != null">Chord Chart?</a>
             </div>
 
             <!--Title pulldown-->
