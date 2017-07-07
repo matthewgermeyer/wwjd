@@ -7,6 +7,7 @@ public class User {
     private String username;
     private String password;
     private boolean enabled;
+    private String bio;
 
     public String getUsername() {
         return username;
@@ -30,6 +31,14 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     @Override

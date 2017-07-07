@@ -3,15 +3,21 @@ package com.example.controller;
 import com.example.common.Util;
 import com.example.domain.Song;
 import com.example.service.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +25,7 @@ import java.util.TreeSet;
 
 @Controller
 public class JimiController {
+    private static final Logger logger = LoggerFactory.getLogger(JimiController.class);
 
     @Autowired
     UserService userService;
@@ -50,6 +57,11 @@ public class JimiController {
         return "song";
     }
 
+    @GetMapping("/profile")
+    public String profilePage() {
+        return "profile";
+    }
+
     @PostMapping("/project/key")
     public String keyChosen(@RequestParam(value = "key",
             required = true) String key, Model model) {
@@ -63,9 +75,7 @@ public class JimiController {
 
         List<String> songChords = util.songChordsFromGenre(genre, key);
 
-
-        //adds genretext to playbutton in model
-        util.genreOnPlayButton(genre, model);
+        util.genreOnPlayButton(genre, model);  // Gives a label to play button
         model.addAttribute("genre", genre);
         model.addAttribute("key", key);
         model.addAttribute("songChords", songChords);
@@ -160,4 +170,26 @@ public class JimiController {
         return "song";
     }
 
+    @GetMapping("/hookchord")
+    public String testHookChordAPI(Model model) {
+
+        model.addAttribute("hookChords", hookTheoryService.getHookTheoryChords("1"));
+
+        return "hookchord";
+    }
+
+
+
+    @ExceptionHandler(value = Exception.class)
+    public ModelAndView handleDefaultErrors(final Exception exception, final HttpServletRequest request, final HttpServletResponse resp) {
+        logger.warn(exception.getMessage() + "\n" + stackTraceAsString(exception));
+        return new ModelAndView("error", "message", exception.getMessage());
+    }
+
+    private String stackTraceAsString(Exception exception) {
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        exception.printStackTrace(pw);
+        return sw.toString();
+    }
 }

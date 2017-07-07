@@ -10,19 +10,21 @@
     <link href="/css/landing-page.css" rel="stylesheet"/>
     <!-- Custom Fonts -->
     <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+          type="text/css"/>
 
     <script src="/js/jquery.js"></script>
     <script src="/js/wwjd.js"></script>
 </head>
-<body>
 
+<body>
 <!--Navigation -->
 <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
     <div class="container topnav">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -34,7 +36,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <b class = "caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                            class="glyphicon glyphicon-user"></span> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="/profile">Profile</a></li>
                         <li><a href="/manageSongs">Manage Songs</a></li>
@@ -52,75 +55,29 @@
 <br/>
 <br/>
 <br/>
+<div class="container"> <h1 class="text-center">Most common chords to come next </h1></div>
+<br/>
 
+
+<!--HookChords table-->
 <div class="container">
-    <div>
-        <h2 class = "text-center">Your Tunes!</h2>
+    <div th:if="${not #lists.isEmpty(hookChords)}">
+        <table class="table table-striped table-bordered table-hover">
+            <tr>
+                <th class="text-center">Chord ID</th>
+                <th class="text-center"> HTML</th>
+                <th class="text-center"> probability</th>
+            </tr>
+            <tr th:each="hookChord, hookStat :${hookChords}" th:unless="${hookStat.index > 5}">
+                <td class="text-center" th:text="${hookChord.chord_ID}"></td>
+                <td class="text-center" th:text="${hookChord.chord_HTML}"></td>
+                <td class="text-center" th:text="${hookChord.probability}"></td>
+            </tr>
+        </table>
     </div>
 </div>
 
-<br/>
-<br/>
-<br/>
-<div class="container">
-        <div class="col-md-3"></div>
-        <div class="col-md-6 text-center">
-            <a href="/project/key" class="btn btn-info btn-block" role="button" aria-disabled="true">Create a Tune!</a><br/>
-        </div>
-    <div class="col-md-3"></div>
-</div>
 
-<!--Your Songs-->
-<div class="container ">
-<div th:if="${not #lists.isEmpty(songs)}">
-
-    <table class="table table-striped table-bordered table-hover">
-        <colgroup>
-            <col class="col-md-4"/>
-            <col class="col-md-7"/>
-        </colgroup>
-        <tbody>
-        <tr>
-            <th class="text-center"> Title</th>
-            <th class="text-center col-md-6"> Chords</th>
-            <th class="text-center"> Key</th>
-            <th class="text-center"> Genre</th>
-            <th class="text-center"> Edit</th>
-        </tr>
-
-        <tr th:each="song:${songs}">
-            <td class="text-center" th:text="${song.title}"></td>
-            <td class="text-center" th:text="${song.chords}"></td>
-            <td class="text-center" th:text="${song.key}"></td>
-            <td class="text-center" th:text="${song.genre}"></td>
-            <td>
-                <!--Delete Button-->
-                <form th:action="@{/mySongs/delete}" method="post">
-                    <input type="hidden" th:value="${song.id}" name="songId"/>
-                    <button class="btn btn-danger btn-sm" type="submit" value="Submit">
-                        <span class="glyphicon glyphicon-trash"></span>
-                        Delete</button>
-                </form>
-            </td>
-
-            <td>
-                <!--Update Button-->
-                <button class="btn btn-primary btn-sm" type="submit" form="update" value="Submit">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                    Rename</button>
-
-                <form th:action="@{/mySongs/update}" method="post" id="update">
-                    <input type="hidden" th:value="${song.id}" name="songId"/>
-                    <input type="text" placeholder="Rename?" name="songTitle"/>
-                </form>
-            </td>
-
-        </tr>
-        </tbody>
-    </table>
-</div>
-</div>
-<br/>
 
 <!--Get in Touch Banner-->
 <div class="banner">
@@ -140,7 +97,8 @@
                                 class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
                     </li>
                     <li>
-                        <a href="https://www.linkedin.com/in/matt-germeyer-988b8383/" class="btn btn-default btn-lg"><i
+                        <a href="https://www.linkedin.com/in/matt-germeyer-988b8383/"
+                           class="btn btn-default btn-lg"><i
                                 class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
                     </li>
                 </ul>
@@ -149,7 +107,6 @@
     </div>
     <!-- /.container -->
 </div>
-
 <!-- Footer -->
 <footer>
     <div class="container">
@@ -180,11 +137,7 @@
 </footer>
 
 
-<!-- jQuery -->
-<!--<script src="js/jquery.js"></script>-->
-<!--&lt;!&ndash; Bootstrap Core JavaScript &ndash;&gt;-->
-<!--<script src="js/bootstrap.min.js"></script>-->
-
+<!--jQuery and Bootstrap-->
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 

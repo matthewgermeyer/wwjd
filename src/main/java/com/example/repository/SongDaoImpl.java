@@ -66,10 +66,6 @@ public class SongDaoImpl implements SongDao {
         String sql = "update song SET title = ? WHERE id = ?";
         jdbcTemplate.update(sql, title, id);
 
-        System.out.println("==============");
-        System.out.println("updating song -> " + id);
-        System.out.println("new title     -> " + title);
-
     }
 
 private static class SongMapper implements RowMapper<Song> {
