@@ -69,6 +69,46 @@ public class JimiController {
         return "song";
     }
 
+    @GetMapping("/hookchord")
+    public String hookChordAPI(Model model) {
+        model.addAttribute("hookChords", hookTheoryService.getHookTheoryChords(""));
+
+        return "hookchord";
+    }
+
+    @PostMapping("/hookchord/key")
+    public String songKeyAdded(@RequestParam(value = "key",
+            required = true) String key, Model model) {
+
+
+        model.addAttribute("key", key);
+        model.addAttribute("chordChoice", chordService.getBasicChords(key));
+        model.addAttribute("hookChords", hookTheoryService.getHookTheoryChords(""));
+
+        return "hookchord";
+    }
+
+    @PostMapping("/hookchord/key/chord")
+    public String songChordAdded(@RequestParam(value = "key",
+            required = true) String key, @RequestParam(value = "chordToAdd", required = true) String chordToAdd, @RequestParam(value = "songChords", required = false) List<String> songChords, Model model) {
+
+        songChords.add(chordToAdd);
+        System.out.println(chordService.getBasicChords(key));
+
+//        AnalyzeProgression(songChords);
+
+
+
+        model.addAttribute("key", key);
+        model.addAttribute("songChords", util.cleanUpSongChords(songChords));
+        model.addAttribute("chordChoice", chordService.getBasicChords(key));
+        model.addAttribute("hookChords", hookTheoryService.getHookTheoryChords(""));
+
+        return "hookchord";
+    }
+
+
+
     @GetMapping("/genre")
     public String getSonginGenre(
             @RequestParam(value = "key", required = true) String key,@RequestParam(value = "genre", required = true) String genre, Model model) {
@@ -170,16 +210,10 @@ public class JimiController {
         return "song";
     }
 
-    @GetMapping("/hookchord")
-    public String testHookChordAPI(Model model) {
-
-        model.addAttribute("hookChords", hookTheoryService.getHookTheoryChords("1"));
-
-        return "hookchord";
-    }
 
 
 
+    //Exception Handling --
     @ExceptionHandler(value = Exception.class)
     public ModelAndView handleDefaultErrors(final Exception exception, final HttpServletRequest request, final HttpServletResponse resp) {
         logger.warn(exception.getMessage() + "\n" + stackTraceAsString(exception));

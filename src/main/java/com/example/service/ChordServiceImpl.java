@@ -15,7 +15,7 @@ public class ChordServiceImpl implements ChordService {
 
     @Override
     public List<String> getBasicChords(String key) {
-        ChordProgression cp = new ChordProgression("I ii iii IV V vi vii");
+        ChordProgression cp = new ChordProgression("I ii iii IV V vi");
         cp.setKey(key);
         return chordsFromCP(cp);
     }
@@ -52,16 +52,16 @@ public class ChordServiceImpl implements ChordService {
         //Use jFugue to convert our generic progression to human readable chords list
         for (Chord chord : cp.getChords()) {
             String original = chord.toHumanReadableString();
-            String root = original.substring(0, 2);
+            String root = original.substring(0, 2);//gather the root
 
-            //First gather the root
-            //Drop off the number (3, 4 or 5) that represents the octave of the root.
+
+
             if (root.substring(1, 2).equals("4") || root.substring(1, 2).equals("5") || root.substring(1, 2).equals("3")) {
-                root = root.substring(0, 1);
+                root = root.substring(0, 1); //Get rid of the octave
             }
-            //Gather the extension
+
             String ext = original.substring(original.length() - 3);
-            ext = ext.toLowerCase();
+            ext = ext.toLowerCase();  //Gather the extension
 
             //convert the extension to more user friendly versions.
             switch (ext) {
@@ -84,6 +84,12 @@ public class ChordServiceImpl implements ChordService {
 
     }
 
+    @Override
+    public String analyzeSongChords(List<String> songChords) {
+
+
+        return null;
+    }
 }
 
 

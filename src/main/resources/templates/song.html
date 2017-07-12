@@ -154,7 +154,11 @@
     <h1 class="text-center"> <span th:each="songChord : ${songChords}"
                                    th:text=" ${songChord} + '   |  ' "></span></h1>
 </div>
+
+
 <br/>
+
+
 <div class="container">
     <div class="row">
         <!--Play {genre} button-->
@@ -197,32 +201,6 @@
 <br/>
 <br/>
 
-<!--Generate song Buttons-->
-<!--<div class="container" th:if="${key} != null ">-->
-<!--<div class="col-md-3">-->
-<!--<a href="#" th:href="@{/genre(key=${key},genre=blues)}">-->
-<!--<button class="btn btn-success btn-lg" role="button">Blues!</button>-->
-<!--</a>-->
-<!--</div>-->
-
-<!--<div class="col-md-3">-->
-<!--<a href="#" th:href="@{/genre(key=${key},genre=popRock)}">-->
-<!--<button class="btn btn-success btn-lg" role="button">Pop - Rock</button>-->
-<!--</a>-->
-<!--</div>-->
-
-<!--<div class="col-md-3">-->
-<!--<a href="#" th:href="@{/genre(key=${key},genre=soulful)}">-->
-<!--<button class="btn btn-success btn-lg" role="button">Soulful</button>-->
-<!--</a>-->
-<!--</div>-->
-
-<!--<div class="col-md-3">-->
-<!--<a href="#" th:href="@{/genre(key=${key},genre=classicRock)}">-->
-<!--<button class="btn btn-success btn-lg" role="button">Simple Rock!</button>-->
-<!--</a>-->
-<!--</div>-->
-<!--</div>-->
 
 <div class="container" th:if="${key} != null ">
     <div class="row">

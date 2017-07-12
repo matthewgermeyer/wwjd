@@ -51,15 +51,70 @@
     <!-- /.container -->
 </nav>
 
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 
-<br/>
-<br/>
-<br/>
-<div class="container"> <h1 class="text-center">Most common chords to come next </h1></div>
-<br/>
+<!--Key Select-->
+<div class="container" th:if="${key} == null">
+    <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4"></div>
+        <div class="col-sm-4 col-md-4 col-lg-4 center-block text-center">
+            <form action="/hookchord/key" method="post">
+                <select name="key" onchange="this.form.submit()">
+                    <option>Select a Key!</option>
+                    <option value="C">C - easiest!</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                    <option value="A">A</option>
+
+                </select>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--Chord Select-->
+<div class="container" th:if="${key} != null">
+    <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4"></div>
+        <div class="col-sm-4 col-md-4 col-lg-4 center-block text-center">
+            <form action="/hookchord/key/chord" method="post">
+                <select name="chordToAdd">
+                    <option th:each="chordChoice : ${chordChoice}"
+                            th:value="${chordChoice}"
+                            th:text="${chordChoice}"></option>
+                </select>
+
+                <input type="hidden" name="key" th:value="${key}"/>
+                <input type="hidden" name="songChords" th:value="${songChords}"/>
+                <input class="btn btn-primary btn-md" role="button" type="submit" value="Add Chord"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--Song Chords-->
+<div class="container">
+    <!--Key-->
+    <span class="text-center">Key is </span><span th:text="${key} + '!'"></span>
+    <h1 class="text-center"> <span th:each="songChord : ${songChords}"
+                                   th:text=" ${songChord} + '   |  ' "></span></h1>
+
+
+</div>
+
+
 
 
 <!--HookChords table-->
+<div class="container"> <h1 class="text-center">Most common chords to come next </h1></div>
 <div class="container">
     <div th:if="${not #lists.isEmpty(hookChords)}">
         <table class="table table-striped table-bordered table-hover">

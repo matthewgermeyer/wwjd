@@ -55,7 +55,7 @@ public class HookTheoryServiceImpl implements HookTheoryService{
     @Override
     public List<HookTheoryChord> getHookTheoryChords(String chord){
         String targetURL ="https://api.hooktheory.com/v1/trends/nodes?cp=";
-        String chordUrl = "";
+        String chordUrl = chord;
         String finishedURL = targetURL + chordUrl;
 
         RestTemplate restTemplate = new RestTemplate();
@@ -65,7 +65,7 @@ public class HookTheoryServiceImpl implements HookTheoryService{
         headers.set("Content", "application/json");
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        System.out.println(restTemplate.exchange(finishedURL, HttpMethod.GET, entity, String.class));
+//        System.out.println(restTemplate.exchange(finishedURL, HttpMethod.GET, entity, String.class));
 
         ResponseEntity<List<HookTheoryChord>> songResponse =
                 restTemplate.exchange(finishedURL,
@@ -73,9 +73,6 @@ public class HookTheoryServiceImpl implements HookTheoryService{
                         });
         List<HookTheoryChord> chords = songResponse.getBody();
 
-        for (HookTheoryChord c : chords) {
-            System.out.println(chord);
-        }
 
         return chords;
 

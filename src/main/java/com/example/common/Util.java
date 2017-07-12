@@ -88,5 +88,17 @@ public class Util {
     }
 
 
+    public List<String> cleanUpSongChords(List<String> songChords){
+        List<String> cleanedUp = new ArrayList<>();
+
+        for (String s : songChords) {
+            s = s.replace("[","");
+            s = s.replace("]", "");
+            cleanedUp.add(s);
+        }
+        return cleanedUp;
+    }
+
+
 
 }

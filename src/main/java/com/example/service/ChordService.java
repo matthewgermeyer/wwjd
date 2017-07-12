@@ -13,6 +13,7 @@ public interface ChordService {
      List<String> generatePopRock(String key);
      List<String> generateSoulful(String key);
      List<String> generateBlues(String key);
+     String analyzeSongChords(List<String> songChords);
 
 
 
